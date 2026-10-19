@@ -7,21 +7,22 @@
 <meta name="description" content="Come Back Home by Krystal Green. When everything is lost, where are you found? Part One of The Home Trilogy." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Figtree:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    /* palette: the three greens you shared + a deep forest green for text */
-    --mist:   #EDF8E9;   /* page background */
-    --leaf:   #C7E9C0;   /* bands, soft panels */
-    --fresh:  #A1D99B;   /* accents */
-    --forest: #1F4D33;   /* buttons, strong accents */
-    --ink:    #14301F;   /* headings */
-    --soft:   #35503F;   /* body text */
-    --muted:  #567060;   /* small text */
-    --line:   #B5D9AE;
-    --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-    --sans:   'Figtree', 'Helvetica Neue', Arial, sans-serif;
+    --mist:    #EAF3E6;   /* page background */
+    --leaf:    #C2E5B8;   /* soft panels */
+    --fresh:   #94D189;   /* accents */
+    --forest:  #173D28;   /* buttons, strong accents */
+    --ink:     #0D2418;   /* headings */
+    --soft:    #2A4535;   /* body text */
+    --muted:   #4A6655;   /* small text */
+    --line:    #A3D499;
+    --dossier: #F4F8F2;   /* paper card bg */
+    --serif:   'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans:    'Figtree', 'Helvetica Neue', Arial, sans-serif;
+    --mono:    'Special Elite', monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -36,11 +37,12 @@
   /* ---------- Header ---------- */
   header.site {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 22px 48px; position: relative; z-index: 5;
+    padding: 22px 48px; position: sticky; top: 0; background: rgba(234, 243, 230, 0.95);
+    backdrop-filter: blur(8px); z-index: 100; border-bottom: 1px solid var(--line);
   }
-  .site-title { font-family: var(--serif); font-size: 1.55rem; font-weight: 700; letter-spacing: .005em; cursor: pointer; }
-  nav.main { display: flex; gap: 34px; }
-  nav.main a { font-size: .98rem; font-weight: 500; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: border-color .2s; }
+  .site-title { font-family: var(--serif); font-size: 1.55rem; font-weight: 700; letter-spacing: .005em; cursor: pointer; color: var(--ink); }
+  nav.main { display: flex; gap: 28px; flex-wrap: wrap; }
+  nav.main a { font-size: .95rem; font-weight: 500; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: border-color .2s; }
   nav.main a:hover, nav.main a.active { border-bottom-color: var(--forest); }
 
   /* ---------- Shared ---------- */
@@ -52,9 +54,9 @@
     display: inline-block; background: var(--forest); color: #fff;
     font-family: var(--sans); font-size: .95rem; font-weight: 600; letter-spacing: .02em;
     padding: 14px 32px; border-radius: 999px; border: 2px solid var(--forest); cursor: pointer;
-    transition: background .2s, color .2s;
+    transition: background .2s, color .2s, transform .1s;
   }
-  .btn:hover { background: var(--ink); border-color: var(--ink); }
+  .btn:hover { background: var(--ink); border-color: var(--ink); transform: translateY(-1px); }
   .btn.outline { background: transparent; color: var(--forest); }
   .btn.outline:hover { background: var(--forest); color: #fff; }
   .body-text { font-size: 1.05rem; color: var(--soft); max-width: 48ch; }
@@ -62,10 +64,11 @@
 
   /* ---------- Home: hero ---------- */
   .hero {
-    margin: 4px 48px 0; border-radius: 28px; overflow: hidden;
+    margin: 24px 48px 0; border-radius: 28px; overflow: hidden;
     background:
-      radial-gradient(ellipse 55% 80% at 82% 40%, rgba(161,217,155,.75), transparent 70%),
-      linear-gradient(135deg, var(--leaf) 0%, #D9F0D3 55%, var(--mist) 100%);
+      radial-gradient(ellipse 55% 80% at 82% 40%, rgba(148,209,137,.75), transparent 70%),
+      linear-gradient(135deg, var(--leaf) 0%, #D4EED0 55%, var(--mist) 100%);
+    border: 1px solid var(--line);
   }
   .hero-grid {
     display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center;
@@ -75,15 +78,31 @@
   .hero h1 { font-size: clamp(2.8rem, 5.6vw, 4.8rem); line-height: 1.02; max-width: 13ch; }
   .hero-book { margin-top: 26px; font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--ink); }
   .hero-book small { display: block; font-family: var(--sans); font-size: .98rem; font-weight: 400; color: var(--soft); margin-top: 2px; }
-  .hero .body-text { margin-top: 14px; }
   .hero .actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .isbn { margin-top: 20px; font-size: .88rem; color: var(--muted); }
+  
+  /* Pricing Badge */
+  .pricing-badge {
+    margin-top: 16px; display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.7); padding: 8px 16px; border-radius: 99px; border: 1px solid var(--line);
+  }
+  .pricing-badge .old-price { text-decoration: line-through; color: var(--muted); font-size: 1rem; }
+  .pricing-badge .current-price { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--forest); }
+  .pricing-badge .shipping-note { font-size: 0.85rem; color: var(--soft); font-weight: 500; }
+
+  .isbn { margin-top: 16px; font-size: .88rem; color: var(--muted); font-family: var(--mono); }
 
   .covers { display: flex; justify-content: center; align-items: center; padding: 10px 0; }
-  .covers img { width: 50%; border-radius: 4px; box-shadow: 0 26px 50px -18px rgba(20,48,31,.55); }
+  .covers img { width: 50%; border-radius: 6px; box-shadow: 0 26px 50px -18px rgba(13,36,24,.55); border: 1px solid rgba(255,255,255,0.4); }
   .covers .front { position: relative; z-index: 2; transform: rotate(-3deg); }
   .covers .back  { margin-left: -12%; transform: rotate(4deg) translateY(22px); }
   .covers .front:only-child { width: 62%; }
+
+  /* Book Specs Grid */
+  .book-specs {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 24px; max-width: 500px;
+  }
+  .spec-card { background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: 0.9rem; }
+  .spec-card strong { display: block; color: var(--forest); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
   /* ---------- Home: pull quote ---------- */
   .pull { text-align: center; padding: 96px 24px 84px; }
@@ -93,37 +112,69 @@
   .story { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; padding: 10px 0 90px; align-items: start; }
   .story h2 { font-size: clamp(2.4rem, 4vw, 3.4rem); }
   .story p { font-size: 1.1rem; color: var(--soft); margin-bottom: 18px; max-width: 62ch; }
-  .story .hook { color: var(--ink); font-weight: 600; }
+  .story .hook { color: var(--ink); font-weight: 600; font-family: var(--serif); font-size: 1.25rem; border-left: 3px solid var(--forest); padding-left: 16px; margin-top: 24px; }
 
   /* ---------- Home: trilogy ---------- */
   .trilogy { border-top: 1px solid var(--line); padding: 60px 0 80px; }
   .tri-label { font-family: var(--serif); font-size: 1.9rem; font-weight: 600; margin-bottom: 28px; }
   .tri-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .tri-item { background: #F7FCF5; border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; }
-  .tri-item .n { font-size: .9rem; color: var(--muted); font-weight: 500; }
+  .tri-item { background: #F4F8F2; border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; }
+  .tri-item .n { font-size: .9rem; color: var(--muted); font-weight: 500; font-family: var(--mono); }
   .tri-item .t { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin: 4px 0 6px; line-height: 1.1; }
   .tri-item .s { font-size: .95rem; color: var(--soft); }
   .tri-item.live { background: var(--leaf); border-color: var(--fresh); }
   .tri-item.live .s { color: var(--forest); font-weight: 600; }
 
+  /* ---------- Case Files (News Postcards) ---------- */
+  .case-files-section { padding: 60px 0 90px; border-top: 1px solid var(--line); background: rgba(194, 229, 184, 0.15); }
+  .case-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
+  .case-header h2 { font-size: clamp(2.4rem, 4vw, 3.2rem); margin-bottom: 14px; }
+  .case-header p { color: var(--soft); font-size: 1.05rem; }
+  .dossier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
+  .dossier-card {
+    background: var(--dossier); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+    box-shadow: 0 12px 30px rgba(13,36,24,0.08); transition: transform .2s, box-shadow .2s; cursor: pointer; position: relative;
+  }
+  .dossier-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(13,36,24,0.15); }
+  .dossier-card::before {
+    content: "CLASSIFIED ARCHIVE"; position: absolute; top: -10px; right: 20px; background: var(--forest); color: #fff;
+    font-family: var(--mono); font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.05em;
+  }
+  .dossier-card img { width: 100%; border-radius: 6px; border: 1px solid #d0e2cb; margin-bottom: 14px; }
+  .dossier-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .dossier-date { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
+  .dossier-desc { font-size: 0.95rem; color: var(--soft); line-height: 1.5; }
+
+  /* ---------- Sample Preview Section ---------- */
+  .preview-section { padding: 80px 0; border-top: 1px solid var(--line); background: var(--mist); }
+  .preview-box {
+    background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 48px;
+    display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: center;
+    box-shadow: 0 20px 40px rgba(13,36,24,0.05);
+  }
+  .preview-box h2 { font-size: clamp(2.2rem, 3.5vw, 3rem); margin-bottom: 16px; }
+  .preview-actions { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+  .pdf-preview-container { width: 100%; height: 450px; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; background: #f9fbf8; }
+  .pdf-preview-container iframe { width: 100%; height: 100%; border: none; }
+
   /* ---------- Credits line + band ---------- */
   .credits-line { text-align: center; padding: 0 24px 70px; font-size: 1rem; color: var(--soft); }
   .credits-line a { border-bottom: 2px solid var(--fresh); color: var(--ink); font-weight: 500; }
   .credits-line span { margin: 0 10px; color: var(--muted); }
-  .band { background: var(--leaf); padding: 80px 0; }
+  .band { background: var(--leaf); padding: 80px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .band-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
   .band h2 { font-size: clamp(2.2rem, 3.6vw, 3rem); margin-bottom: 14px; }
   .band .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; }
 
   /* ---------- About ---------- */
-  .about-block { padding: 56px 0; }
+  .about-block { padding: 64px 0; }
   .about-block + .about-block { border-top: 1px solid var(--line); }
   .about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
   .about-top h1, .about-top h2 { font-size: clamp(2.4rem, 4vw, 3.4rem); margin-bottom: 22px; }
   .about-top p { font-size: 1.1rem; color: var(--soft); max-width: 52ch; }
   .portrait {
     position: relative; width: 100%; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden;
-    background: var(--leaf);
+    background: var(--leaf); border: 1px solid var(--line);
   }
   .portrait::before {
     content: attr(data-initials); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -131,45 +182,55 @@
   }
   .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  /* ---------- Contact / form ---------- */
-  .contact-top { padding: 40px 0 56px; }
+  /* ---------- Contact / Order Form ---------- */
+  .contact-top { padding: 50px 0 30px; text-align: center; max-width: 700px; margin: 0 auto; }
   .contact-top h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); margin-bottom: 16px; }
-  form.order { display: grid; gap: 18px; }
-  form.order .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  form.order label { display: block; font-size: .92rem; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
-  form.order label small { color: var(--muted); margin-left: 4px; font-weight: 400; }
-  form.order input, form.order textarea {
+  
+  .order-container { max-width: 900px; margin: 0 auto 80px; padding: 0 24px; }
+  .order-card { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 48px; box-shadow: 0 20px 40px rgba(13,36,24,0.06); }
+  
+  /* QR Code Payment Box */
+  .payment-box { background: var(--mist); border: 1px dashed var(--forest); border-radius: 16px; padding: 24px; margin-bottom: 28px; text-align: center; }
+  .payment-box h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--forest); margin-bottom: 8px; }
+  .payment-box p { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
+  .qr-placeholder { width: 160px; height: 160px; background: #fff; margin: 0 auto 12px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); border-radius: 8px; }
+
+  form.order { display: grid; gap: 20px; }
+  form.order .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  form.order label { display: block; font-size: .92rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  form.order label small { color: var(--muted); margin-left: 4px; font-weight: 400; font-family: var(--mono); }
+  form.order input, form.order select, form.order textarea {
     width: 100%; font-family: inherit; font-size: 1rem; color: var(--ink);
-    background: #fff; border: 1px solid #8fb98a; padding: 12px 18px; border-radius: 999px; outline: none;
+    background: #fdfdfd; border: 1px solid #9ec897; padding: 12px 18px; border-radius: 12px; outline: none; transition: border-color .2s, box-shadow .2s;
   }
-  form.order textarea { border-radius: 18px; min-height: 130px; resize: vertical; padding: 14px 18px; }
-  form.order input:focus, form.order textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 2px var(--forest); }
-  .form-note { font-size: .95rem; margin-top: 8px; min-height: 1.2em; color: var(--soft); }
+  form.order textarea { min-height: 110px; resize: vertical; }
+  form.order input:focus, form.order select:focus, form.order textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,61,40,0.15); }
+  .form-note { font-size: .98rem; margin-top: 12px; font-weight: 500; color: var(--forest); }
 
   /* ---------- Footer ---------- */
-  footer.site { background: var(--ink); color: #E3F4DE; padding: 52px 48px 34px; }
+  footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); }
   .foot-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
   .foot-title { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: #fff; }
   .foot-mail { font-size: 1.1rem; color: var(--fresh); border-bottom: 1px solid transparent; }
   .foot-mail:hover { border-bottom-color: var(--fresh); }
-  .foot-small { margin-top: 22px; font-size: .88rem; color: #A9C9A3; }
+  .foot-small { margin-top: 22px; font-size: .88rem; color: #A4C4A0; font-family: var(--mono); }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
     header.site { padding: 16px 20px; }
     .site-title { font-size: 1.3rem; }
-    nav.main { gap: 20px; }
-    .container { padding: 0 22px; }
-    .hero { margin: 4px 14px 0; border-radius: 22px; }
-    .hero-grid { grid-template-columns: 1fr; padding: 40px 24px 36px; gap: 28px; }
+    nav.main { gap: 18px; }
+    .container { padding: 0 20px; }
+    .hero { margin: 16px 14px 0; border-radius: 22px; }
+    .hero-grid, .preview-box, .order-card { grid-template-columns: 1fr; padding: 36px 20px; gap: 28px; }
     .covers { order: -1; }
     .covers img { width: 46%; }
     .story, .band-grid, .about-top { grid-template-columns: 1fr; gap: 32px; }
     .about-block { padding: 40px 0; }
     .tri-grid { grid-template-columns: 1fr; }
-    .pull { padding: 64px 24px 56px; }
+    .pull { padding: 64px 20px 56px; }
     form.order .row { grid-template-columns: 1fr; }
-    footer.site { padding: 40px 22px 28px; }
+    footer.site { padding: 40px 20px 28px; }
     .foot-title { font-size: 1.6rem; }
   }
 </style>
@@ -179,8 +240,11 @@
 <header class="site">
   <div class="site-title" data-go="home">Come Back Home</div>
   <nav class="main">
+    <a href="#home" data-go="home" class="active">Home</a>
+    <a href="#cases" data-go="cases">Case Files</a>
+    <a href="#preview" data-go="preview">Sample Preview</a>
     <a href="#about" data-go="about">About</a>
-    <a href="#contact" data-go="contact">Contact</a>
+    <a href="#order" data-go="order">Order Book</a>
   </nav>
 </header>
 
@@ -190,13 +254,28 @@
   <section class="hero">
     <div class="hero-grid">
       <div>
-        <div class="hero-eyebrow">Part One of The Home Trilogy</div>
+        <div class="hero-eyebrow">Part One of The Home Trilogy &bull; Crime Thriller &amp; Suspense</div>
         <h1>When everything is lost, where are you found?</h1>
         <div class="hero-book">Come Back Home<small>A novel by Krystal Green</small></div>
-        <p class="body-text">23-year-old Christine Tavley is searching for the truth behind the explosion that wiped her hometown off the map &mdash; and the serial bomber hiding behind the symbol of a green fairy.</p>
+        
+        <div class="pricing-badge">
+          <span class="old-price">&#8377;399</span>
+          <span class="current-price">&#8377;349</span>
+          <span class="shipping-note">+ Shipping</span>
+        </div>
+
+        <p class="body-text" style="margin-top: 14px;">23-year-old Christine Tavley is searching for the truth behind the explosion that wiped her hometown off the map &mdash; and the serial bomber hiding behind the symbol of a green fairy.</p>
+        
+        <div class="book-specs">
+          <div class="spec-card"><strong>Genre</strong> Crime Thriller</div>
+          <div class="spec-card"><strong>Format</strong> Paperback</div>
+          <div class="spec-card"><strong>Language</strong> English</div>
+          <div class="spec-card"><strong>Publisher</strong> Independent</div>
+        </div>
+
         <div class="actions">
-          <a class="btn" href="#" target="_blank" rel="noopener noreferrer">Buy Now</a>
-          <a class="btn outline" href="#contact" data-go="contact">Order by form</a>
+          <a class="btn" href="#order" data-go="order">Order Paperback</a>
+          <a class="btn outline" href="#preview" data-go="preview">Read Sample Preview</a>
         </div>
         <div class="isbn">ISBN 978-93-6012-157-0</div>
       </div>
@@ -217,10 +296,11 @@
       <div>
         <p>23-year-old Christine Tavley has been searching for the truth behind the incident that destroyed her life five years ago. The explosion of 22nd March 1982 wiped her hometown, Totin, off the map. It was the beginning of the serial bomber known as Absinthe. Hiding behind the symbol of a green fairy, Absinthe comes alive with a broadcast. Two weeks later, another town vanishes just like Totin.</p>
         <p>Christine's survival is fueled by the people she has left, the old memories, and the hope that she will one day get to the bottom of what Absinthe really wants. She visits the deserted town in search of answers which ultimately forces her to look closer than she expected. Getting closer to the truth feels freeing &mdash; until she overhears something she wasn't supposed to.</p>
-        <p class="hook">The truth that was supposed to be worth the loss becomes deadly, trapping her in ways she had never imagined.</p>
+        <div class="hook">The truth that was supposed to be worth the loss becomes deadly, trapping her in ways she had never imagined.</div>
       </div>
     </section>
 
+    <!-- Trilogy Section -->
     <section class="trilogy">
       <div class="tri-label">The Home Trilogy</div>
       <div class="tri-grid">
@@ -231,7 +311,20 @@
     </section>
   </div>
 
-  <div class="credits-line">
+  <!-- Case Files Preview Banner -->
+  <section class="case-files-section">
+    <div class="container">
+      <div class="case-header">
+        <h2>Classified Evidence &amp; News Archives</h2>
+        <p>Explore the recovered newspaper clippings, police reports, and broadcasts surrounding the Absinthe bombings that shaped Christine's world.</p>
+        <div style="margin-top: 20px;">
+          <a class="btn" href="#cases" data-go="cases">View All Case Files</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="credits-line" style="padding-top: 60px;">
     Written by <a href="#about" data-go="about">Krystal Green</a><span>&middot;</span>
     Edited by <a href="#about" data-go="about">Prathamesh S. Kadam</a><span>&middot;</span>
     Cover design by <a href="#about" data-go="about">Aditi Srivastava</a>
@@ -240,18 +333,113 @@
   <section class="band">
     <div class="container band-grid">
       <div>
-        <h2>Get your copy</h2>
-        <p class="body-text">Buy online, or send an order request through the form and we'll get back to you with the details.</p>
+        <h2>Claim Your Copy Today</h2>
+        <p class="body-text">Order directly through our verified form below and secure your paperback edition of Part One of The Home Trilogy.</p>
       </div>
       <div class="actions">
-        <a class="btn" href="#" target="_blank" rel="noopener noreferrer">Buy Now</a>
-        <a class="btn outline" href="#contact" data-go="contact">Order by form</a>
+        <a class="btn" href="#order" data-go="order">Order Now (&#8377;349)</a>
+        <a class="btn outline" href="#preview" data-go="preview">Read Free Excerpt</a>
       </div>
     </div>
   </section>
 </main>
 
-<!-- ======================= ABOUT ======================= -->
+<!-- ======================= CASE FILES VIEW ======================= -->
+<main class="view" id="view-cases">
+  <div class="container" style="padding: 60px 48px;">
+    <div class="case-header">
+      <h2>The Absinthe Case Files</h2>
+      <p>Archived news reports and investigative records recovered from the Morganite Courier and regional dispatches (1982&ndash;1987).</p>
+    </div>
+
+    <div class="dossier-grid">
+      <!-- Card 1 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.12.14.jpeg" alt="Totin destroyed by blast">
+        <div class="dossier-title">Totin Destroyed by Blast</div>
+        <div class="dossier-date">Tuesday, March 23, 1982 &bull; The Morganite Courier</div>
+        <div class="dossier-desc">The town of Totin was wiped out by a sudden explosion, leaving officials scrambling for answers and fearing zero survivors in what marked the tragic beginning.</div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.12.24.jpeg" alt="TV broadcast claims credit">
+        <div class="dossier-title">TV Broadcast Claims Credit for Totin</div>
+        <div class="dossier-date">Wednesday, May 26, 1982 &bull; The Morganite Courier</div>
+        <div class="dossier-desc">A hijacked television broadcast across the region features the ominous green fairy symbol, claiming the Totin disaster as an act of courage.</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.12.35.jpeg" alt="Students jailed for fake broadcast">
+        <div class="dossier-title">Students Jailed for Fake Broadcast</div>
+        <div class="dossier-date">Friday, March 8, 1985 &bull; The Morganite Courier</div>
+        <div class="dossier-desc">College media students jailed for staging a hoax Absinthe broadcast, while police confirm the real mastermind remains untraced.</div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.11.54.jpeg" alt="Twelfth blast ends year">
+        <div class="dossier-title">Twelfth Blast Ends Year of Fear</div>
+        <div class="dossier-date">Monday, December 15, 1986 &bull; The Morganite Courier</div>
+        <div class="dossier-desc">Morganite City struck as the twelfth explosion concludes a terrifying year of regional bombings across the continent.</div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.11.46.jpeg" alt="Jeastead gone just one week">
+        <div class="dossier-title">Jeastead Gone After Broadcast</div>
+        <div class="dossier-date">Exclusive &bull; The Courier</div>
+        <div class="dossier-desc">Jeastead was destroyed only seven days after the latest Absinthe broadcast, breaking the established two-week pattern since 1982.</div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.12.48.jpeg" alt="Town near Losponbury wiped out">
+        <div class="dossier-title">Town Near Losponbury Wiped Out</div>
+        <div class="dossier-date">Sunday, June 28, 1987 &bull; The Morganite Courier</div>
+        <div class="dossier-desc">The thirteenth blast obliterates Jeastead near Losponbury as Absinthe returns to the continent where the nightmare first began.</div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="dossier-card">
+        <img src="photo_2026-10-19 22.13.01.jpeg" alt="Lunar Shuttles 30 years">
+        <div class="dossier-title">Lunar Shuttles Marks 30 Years</div>
+        <div class="dossier-date">Sunday, June 28, 1987 &bull; The Morganite Courier</div>
+        <div class="dossier-desc">Commercial space pioneer celebrates three decades in orbit amidst a backdrop of rising terrestrial tension and catastrophe.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================= SAMPLE PREVIEW VIEW ======================= -->
+<main class="view" id="view-preview">
+  <div class="container" style="padding: 60px 48px;">
+    <div class="case-header">
+      <h2>Read a Sample Preview</h2>
+      <p>Immerse yourself in the opening pages of <em>Come Back Home</em> and experience Christine's world before making your purchase.</p>
+    </div>
+
+    <div class="preview-box">
+      <div>
+        <span class="tri-item" style="display:inline-block; padding: 4px 12px; font-size:0.85rem; margin-bottom:12px;">Excerpt &bull; Part One</span>
+        <h2>Step Into the Mystery</h2>
+        <p class="body-text">Get a sneak peek into Christine Tavley's private journal entries and the eerie aftermath of the 1987 disasters. Read directly in your browser or download the sample PDF.</p>
+        <div class="preview-actions">
+          <a class="btn" href="Sample Preview.pdf" target="_blank" rel="noopener noreferrer">Download Sample PDF</a>
+          <a class="btn outline" href="#order" data-go="order">Order Full Novel (&#8377;349)</a>
+        </div>
+      </div>
+      <div>
+        <div class="pdf-preview-container">
+          <iframe src="Sample Preview.pdf" title="Come Back Home Sample Preview"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================= ABOUT VIEW ======================= -->
 <main class="view" id="view-about">
   <div class="container">
 
@@ -269,7 +457,7 @@
       <div class="about-top">
         <div>
           <h2>About the Editor</h2>
-          <p>Prathamesh S. Kadam edited and typeset Come Back Home. By day he researches supernovae and machine learning in astrophysics &mdash; by night, he shapes stories into their final form.</p>
+          <p>Prathamesh S. Kadam edited and typeset <em>Come Back Home</em> with rigorous precision. By day, he researches supernovae and machine learning in astrophysics &mdash; by night, he shapes complex narratives and psychological suspense into their final gripping form.</p>
         </div>
         <div class="portrait" data-initials="PK"><img src="prathamesh.jpg" alt="Prathamesh S. Kadam" onerror="this.remove()"></div>
       </div>
@@ -279,7 +467,7 @@
       <div class="about-top">
         <div>
           <h2>About the Cover Designer</h2>
-          <p>Aditi Srivastava designed the cover and illustrations for Come Back Home. Her full bio is coming soon.</p>
+          <p>Aditi Srivastava designed the atmospheric cover and visual illustrations for <em>Come Back Home</em>. A talented visual artist and illustrator with a profound eye for dark aesthetics and psychological depth, Aditi breathes life into shadows, crafting haunting visual assets that plunge readers straight into the heart of the mystery before they even open the first page.</p>
         </div>
         <div class="portrait" data-initials="AS"><img src="aditi.jpg" alt="Aditi Srivastava" onerror="this.remove()"></div>
       </div>
@@ -288,57 +476,128 @@
   </div>
 </main>
 
-<!-- ======================= CONTACT ======================= -->
-<main class="view" id="view-contact">
+<!-- ======================= ORDER FORM VIEW ======================= -->
+<main class="view" id="view-order">
   <div class="container contact-top">
-    <h1>Order Your Copy</h1>
-    <p class="body-text">Fill out the form with your details and the number of copies you'd like, and we'll get back to you with how to complete your order.</p>
+    <h1>Order Your Paperback Copy</h1>
+    <p class="body-text">Fill out your shipping and payment details below. Price: <strong>&#8377;349 + shipping</strong>. Orders are processed directly.</p>
   </div>
 
-  <section class="band">
-    <div class="container band-grid" style="align-items:start;">
-      <div>
-        <h2>Send an order request</h2>
-        <p class="body-text">Prefer to buy online? Use the Buy Now button on the home page.</p>
-      </div>
-      <form class="order" id="orderForm" novalidate>
-        <div class="row">
-          <div><label for="fn">First Name <small>(required)</small></label><input id="fn" name="first_name" type="text" required></div>
-          <div><label for="ln">Last Name <small>(required)</small></label><input id="ln" name="last_name" type="text" required></div>
+  <div class="order-container">
+    <div class="order-card">
+      
+      <!-- Payment QR Section -->
+      <div class="payment-box">
+        <h3>Step 1: Scan &amp; Pay (&#8377;349 + Shipping)</h3>
+        <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment, then enter your UTR / Transaction ID and details below.</p>
+        <div class="qr-placeholder">
+          [ Insert QR Code Image Here ]
         </div>
-        <div><label for="em">Email <small>(required)</small></label><input id="em" name="email" type="email" required></div>
-        <div><label for="msg">Message <small>(required)</small></label><textarea id="msg" name="message" placeholder="Number of copies, delivery address, anything else we should know" required></textarea></div>
-        <div><button class="btn" type="submit">Send</button><div class="form-note" id="formNote"></div></div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">(Or transfer to UPI ID: <code>krystalgreen2709@oksbi</code>)</p>
+      </div>
+
+      <!-- Order Form -->
+      <form class="order" id="orderForm" novalidate>
+        <h3>Step 2: Shipping &amp; Order Details</h3>
+        <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">All fields marked required must be filled accurately for dispatch.</p>
+
+        <div class="row">
+          <div>
+            <label for="fname">Full Name <small>(required)</small></label>
+            <input id="fname" name="full_name" type="text" placeholder="e.g. Alex Morgan" required>
+          </div>
+          <div>
+            <label for="phone">Contact Number <small>(required)</small></label>
+            <input id="phone" name="contact_number" type="tel" placeholder="10-digit mobile number" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="email">Email ID <small>(required)</small></label>
+          <input id="email" name="email" type="email" placeholder="your.email@example.com" required>
+        </div>
+
+        <div>
+          <label for="addr">Address in Detail <small>(required)</small></label>
+          <textarea id="addr" name="address" placeholder="House/flat no., Building, Street, Area/locality, landmark" required></textarea>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="pincode">Pin Code <small>(required)</small></label>
+            <input id="pincode" name="pincode" type="text" placeholder="6-digit postal code" required>
+          </div>
+          <div>
+            <label for="city">City <small>(required)</small></label>
+            <input id="city" name="city" type="text" placeholder="Your city" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="state">State <small>(required)</small></label>
+            <input id="state" name="state" type="text" placeholder="Your state" required>
+          </div>
+          <div>
+            <label for="quantity">Quantity <small>(required)</small></label>
+            <input id="quantity" name="quantity" type="number" value="1" min="1" max="10" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="utr">UTR / Transaction ID <small>(required)</small></label>
+            <input id="utr" name="utr_transaction_id" type="text" placeholder="Enter payment UPI/Bank UTR reference" required>
+          </div>
+          <div>
+            <label for="source">How did you find out about the book? <small>(optional)</small></label>
+            <select id="source" name="source_found">
+              <option value="">Select option</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Friends">Friends</option>
+              <option value="Family">Family</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn" type="submit" style="width: 100%; text-align: center; margin-top: 10px;">Submit Order Request</button>
+          <div class="form-note" id="formNote"></div>
+        </div>
       </form>
+
     </div>
-  </section>
+  </div>
 </main>
 
 <footer class="site">
   <div class="foot-row">
     <div class="foot-title">Come Back Home</div>
-    <a class="foot-mail" id="footMail" href="#">krstalgreen27@gmail.com</a>
+    <a class="foot-mail" id="footMail" href="#">krystalgreen2709@gmail.com</a>
   </div>
   <div class="foot-small">&copy; 2026 Come Back Home &middot; Krystal Green &middot; ISBN 978-93-6012-157-0</div>
 </footer>
 
 <script>
-  /* ====== SET THESE TWO ====== */
-  const BOOK_EMAIL = 'krystalgreen27@gmail.com';   // shown in the footer and used for the order form
-  const FORM_ENDPOINT = '';                        // optional: a Formspree URL, e.g. https://formspree.io/f/xxxxxxx
+  /* ====== CONFIGURATION ====== */
+  const BOOK_EMAIL = 'krystalgreen2709@gmail.com'; 
+  const FORM_ENDPOINT = ''; // Optional: Formspree URL or backend endpoint if needed
   /* =========================== */
 
   const footMail = document.getElementById('footMail');
   footMail.textContent = BOOK_EMAIL;
   footMail.href = 'mailto:' + BOOK_EMAIL;
 
-  const views = { home: 'view-home', about: 'view-about', contact: 'view-contact' };
+  const views = { home: 'view-home', cases: 'view-cases', preview: 'view-preview', about: 'view-about', order: 'view-order' };
+  
   function show(name) {
     if (!views[name]) name = 'home';
     Object.entries(views).forEach(([k, id]) => document.getElementById(id).classList.toggle('active', k === name));
     document.querySelectorAll('nav.main a').forEach(a => a.classList.toggle('active', a.dataset.go === name));
     window.scrollTo(0, 0);
   }
+
   document.querySelectorAll('[data-go]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
@@ -347,26 +606,59 @@
       history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
     });
   });
-  show((location.hash || '').slice(1));
 
-  /* order form */
+  const initialHash = (location.hash || '').slice(1);
+  if (initialHash && views[initialHash]) {
+    show(initialHash);
+  } else {
+    show('home');
+  }
+
+  /* Order Form Submission Logic */
   const form = document.getElementById('orderForm');
   const note = document.getElementById('formNote');
+  
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (!form.checkValidity()) { note.textContent = 'Please fill in all required fields.'; return; }
-    const data = Object.fromEntries(new FormData(form).entries());
+    if (!form.checkValidity()) { 
+      note.textContent = 'Please fill in all required fields correctly.'; 
+      note.style.color = '#c0392b';
+      return; 
+    }
+    
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
     if (FORM_ENDPOINT) {
       try {
         const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) });
         if (!r.ok) throw new Error();
-        form.reset(); note.textContent = 'Thank you! Your request has been sent.';
-      } catch (_) { note.textContent = 'Something went wrong. Please email ' + BOOK_EMAIL + ' instead.'; }
+        form.reset(); 
+        note.style.color = 'var(--forest)';
+        note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
+      } catch (_) { 
+        note.style.color = '#c0392b';
+        note.textContent = 'Something went wrong. Please email ' + BOOK_EMAIL + ' directly.'; 
+      }
     } else {
-      const subject = encodeURIComponent('Order request: Come Back Home');
-      const body = encodeURIComponent('Name: ' + data.first_name + ' ' + data.last_name + '\nEmail: ' + data.email + '\n\n' + data.message);
+      const subject = encodeURIComponent('Book Order Request: Come Back Home (&#8377;349)');
+      const body = encodeURIComponent(
+        '--- NEW BOOK ORDER REQUEST ---\n\n' +
+        'Full Name: ' + data.full_name + '\n' +
+        'Contact Number: ' + data.contact_number + '\n' +
+        'Email ID: ' + data.email + '\n\n' +
+        'Shipping Address:\n' + data.address + '\n' +
+        'City: ' + data.city + '\n' +
+        'State: ' + data.state + '\n' +
+        'Pin Code: ' + data.pincode + '\n\n' +
+        'Quantity: ' + data.quantity + '\n' +
+        'UTR / Transaction ID: ' + data.utr_transaction_id + '\n' +
+        'Found via: ' + (data.source_found || 'Not specified') + '\n'
+      );
+      
       window.location.href = 'mailto:' + BOOK_EMAIL + '?subject=' + subject + '&body=' + body;
-      note.textContent = 'Opening your email app to send the request…';
+      note.style.color = 'var(--forest)';
+      note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
     }
   });
 </script>
