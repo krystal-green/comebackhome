@@ -133,9 +133,8 @@
   .dossier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
   .dossier-card {
     background: var(--dossier); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
-    box-shadow: 0 12px 30px rgba(13,36,24,0.08); transition: transform .2s, box-shadow .2s; cursor: pointer; position: relative;
+    box-shadow: 0 12px 30px rgba(13,36,24,0.08); transition: transform .2s, box-shadow .2s; position: relative;
   }
-  .dossier-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(13,36,24,0.15); }
   .dossier-card::before {
     content: "CLASSIFIED ARCHIVE"; position: absolute; top: -10px; right: 20px; background: var(--forest); color: #fff;
     font-family: var(--mono); font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.05em;
@@ -205,7 +204,7 @@
   }
   form.order textarea { min-height: 110px; resize: vertical; }
   form.order input:focus, form.order select:focus, form.order textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,61,40,0.15); }
-  .form-note { font-size: .98rem; margin-top: 12px; font-weight: 500; color: var(--forest); }
+  .form-note { font-size: 1rem; margin-top: 14px; font-weight: 600; color: var(--forest); line-height: 1.5; }
 
   /* ---------- Footer ---------- */
   footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); }
@@ -489,80 +488,140 @@
       <!-- Payment QR Section -->
       <div class="payment-box">
         <h3>Step 1: Scan &amp; Pay (&#8377;349 + Shipping)</h3>
-        <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment, then enter your UTR / Transaction ID and details below.</p>
+        <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment, then enter your UTR / Transaction ID, upload your payment screenshot, and submit below.</p>
         <div class="qr-placeholder">
           [ Insert QR Code Image Here ]
         </div>
         <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">(Or transfer to UPI ID: <code>krystalgreen2709@oksbi</code>)</p>
       </div>
 
-      <!-- Order Form -->
-      <form class="order" id="orderForm" novalidate>
+      <!-- Order Form (Direct AJAX Submission to FormSubmit) -->
+      <form class="order" id="orderForm" action="https://formsubmit.co/ajax/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
+        
+        <!-- FormSubmit Configuration Inputs -->
+        <input type="hidden" name="_subject" value="New Book Order Request: Come Back Home (&#8377;349)">
+        <input type="hidden" name="_template" value="table">
+
         <h3>Step 2: Shipping &amp; Order Details</h3>
         <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">All fields marked required must be filled accurately for dispatch.</p>
 
         <div class="row">
           <div>
             <label for="fname">Full Name <small>(required)</small></label>
-            <input id="fname" name="full_name" type="text" placeholder="e.g. Alex Morgan" required>
+            <input id="fname" name="Full_Name" type="text" placeholder="e.g. Alex Morgan" required>
           </div>
           <div>
             <label for="phone">Contact Number <small>(required)</small></label>
-            <input id="phone" name="contact_number" type="tel" placeholder="10-digit mobile number" required>
+            <input id="phone" name="Contact_Number" type="tel" placeholder="10-digit mobile number" required>
           </div>
         </div>
 
         <div>
           <label for="email">Email ID <small>(required)</small></label>
-          <input id="email" name="email" type="email" placeholder="your.email@example.com" required>
+          <input id="email" name="Email_ID" type="email" placeholder="your.email@example.com" required>
         </div>
 
         <div>
           <label for="addr">Address in Detail <small>(required)</small></label>
-          <textarea id="addr" name="address" placeholder="House/flat no., Building, Street, Area/locality, landmark" required></textarea>
+          <textarea id="addr" name="Address_Detail" placeholder="House/flat no., Building, Street, Area/locality, landmark" required></textarea>
         </div>
 
         <div class="row">
           <div>
-            <label for="pincode">Pin Code <small>(required)</small></label>
-            <input id="pincode" name="pincode" type="text" placeholder="6-digit postal code" required>
+            <label for="country">Country <small>(required)</small></label>
+            <select id="country" name="Country" required>
+              <option value="India" selected>India</option>
+            </select>
           </div>
           <div>
-            <label for="city">City <small>(required)</small></label>
-            <input id="city" name="city" type="text" placeholder="Your city" required>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label for="state">State <small>(required)</small></label>
-            <input id="state" name="state" type="text" placeholder="Your state" required>
-          </div>
-          <div>
-            <label for="quantity">Quantity <small>(required)</small></label>
-            <input id="quantity" name="quantity" type="number" value="1" min="1" max="10" required>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <label for="utr">UTR / Transaction ID <small>(required)</small></label>
-            <input id="utr" name="utr_transaction_id" type="text" placeholder="Enter payment UPI/Bank UTR reference" required>
-          </div>
-          <div>
-            <label for="source">How did you find out about the book? <small>(optional)</small></label>
-            <select id="source" name="source_found">
-              <option value="">Select option</option>
-              <option value="Instagram">Instagram</option>
-              <option value="Friends">Friends</option>
-              <option value="Family">Family</option>
-              <option value="Other">Other</option>
+            <label for="state">State (India) <small>(required)</small></label>
+            <select id="state" name="State" required>
+              <option value="">Select State / UT</option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Manipur">Manipur</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Mizoram">Mizoram</option>
+              <option value="Nagaland">Nagaland</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="West Bengal">West Bengal</option>
+              <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+              <option value="Chandigarh">Chandigarh</option>
+              <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+              <option value="Ladakh">Ladakh</option>
+              <option value="Lakshadweep">Lakshadweep</option>
+              <option value="Puducherry">Puducherry</option>
             </select>
           </div>
         </div>
 
+        <div class="row">
+          <div>
+            <label for="city">City <small>(required)</small></label>
+            <input id="city" name="City" type="text" placeholder="Your city" required>
+          </div>
+          <div>
+            <label for="pincode">Pin Code <small>(required)</small></label>
+            <input id="pincode" name="Pin_Code" type="text" placeholder="6-digit postal code" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="quantity">Quantity <small>(required)</small></label>
+            <input id="quantity" name="Quantity" type="number" value="1" min="1" max="10" required>
+          </div>
+          <div>
+            <label for="utr">UTR / Transaction ID <small>(required)</small></label>
+            <input id="utr" name="UTR_Transaction_ID" type="text" placeholder="Enter UPI / Bank UTR reference" required>
+          </div>
+        </div>
+
         <div>
-          <button class="btn" type="submit" style="width: 100%; text-align: center; margin-top: 10px;">Submit Order Request</button>
+          <label for="payment_screenshot">Upload Payment Screenshot <small>(required)</small></label>
+          <input id="payment_screenshot" name="Payment_Screenshot" type="file" accept="image/*" required style="padding: 9px;">
+        </div>
+
+        <div>
+          <label for="source">How did you find out about the book? <small>(optional)</small></label>
+          <select id="source" name="Source_Found">
+            <option value="">Select option</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Friends">Friends</option>
+            <option value="Family">Family</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div id="otherSourceContainer" style="display: none;">
+          <label for="otherSourceInput">Please specify where you found out: <small>(required if Other)</small></label>
+          <input id="otherSourceInput" name="Other_Source_Detail" type="text" placeholder="e.g. Book Blog, YouTube, etc.">
+        </div>
+
+        <div>
+          <button class="btn" type="submit" id="submitBtn" style="width: 100%; text-align: center; margin-top: 10px;">Submit Order Request</button>
           <div class="form-note" id="formNote"></div>
         </div>
       </form>
@@ -582,7 +641,6 @@
 <script>
   /* ====== CONFIGURATION ====== */
   const BOOK_EMAIL = 'krystalgreen2709@gmail.com'; 
-  const FORM_ENDPOINT = ''; // Optional: Formspree URL or backend endpoint if needed
   /* =========================== */
 
   const footMail = document.getElementById('footMail');
@@ -614,9 +672,26 @@
     show('home');
   }
 
-  /* Order Form Submission Logic */
+  /* Conditional Other Source Input */
+  const sourceSelect = document.getElementById('source');
+  const otherContainer = document.getElementById('otherSourceContainer');
+  const otherInput = document.getElementById('otherSourceInput');
+
+  sourceSelect.addEventListener('change', () => {
+    if (sourceSelect.value === 'Other') {
+      otherContainer.style.display = 'block';
+      otherInput.setAttribute('required', 'true');
+    } else {
+      otherContainer.style.display = 'none';
+      otherInput.removeAttribute('required');
+      otherInput.value = '';
+    }
+  });
+
+  /* Order Form AJAX Submission Logic */
   const form = document.getElementById('orderForm');
   const note = document.getElementById('formNote');
+  const submitBtn = document.getElementById('submitBtn');
   
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -626,39 +701,36 @@
       return; 
     }
     
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting order...';
+    note.style.color = 'var(--forest)';
+    note.textContent = 'Sending your order request...';
+
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
     
-    if (FORM_ENDPOINT) {
-      try {
-        const r = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) });
-        if (!r.ok) throw new Error();
-        form.reset(); 
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        form.reset();
+        otherContainer.style.display = 'none';
         note.style.color = 'var(--forest)';
         note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
-      } catch (_) { 
-        note.style.color = '#c0392b';
-        note.textContent = 'Something went wrong. Please email ' + BOOK_EMAIL + ' directly.'; 
+        submitBtn.textContent = 'Order Submitted Successfully!';
+      } else {
+        throw new Error('Server response was not ok');
       }
-    } else {
-      const subject = encodeURIComponent('Book Order Request: Come Back Home (&#8377;349)');
-      const body = encodeURIComponent(
-        '--- NEW BOOK ORDER REQUEST ---\n\n' +
-        'Full Name: ' + data.full_name + '\n' +
-        'Contact Number: ' + data.contact_number + '\n' +
-        'Email ID: ' + data.email + '\n\n' +
-        'Shipping Address:\n' + data.address + '\n' +
-        'City: ' + data.city + '\n' +
-        'State: ' + data.state + '\n' +
-        'Pin Code: ' + data.pincode + '\n\n' +
-        'Quantity: ' + data.quantity + '\n' +
-        'UTR / Transaction ID: ' + data.utr_transaction_id + '\n' +
-        'Found via: ' + (data.source_found || 'Not specified') + '\n'
-      );
-      
-      window.location.href = 'mailto:' + BOOK_EMAIL + '?subject=' + subject + '&body=' + body;
-      note.style.color = 'var(--forest)';
-      note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
+    } catch (err) {
+      note.style.color = '#c0392b';
+      note.textContent = 'Something went wrong. Please email your details and payment screenshot directly to ' + BOOK_EMAIL;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Order Request';
     }
   });
 </script>
