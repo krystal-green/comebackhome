@@ -48,8 +48,8 @@
     backdrop-filter: blur(8px); z-index: 100; border-bottom: 1px solid var(--line);
   }
   .site-title { font-family: var(--serif); font-size: 1.55rem; font-weight: 700; letter-spacing: .005em; cursor: pointer; color: var(--ink); }
-  nav.main { display: flex; gap: 28px; flex-wrap: wrap; }
-  nav.main a { font-size: .95rem; font-weight: 500; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: border-color .2s; }
+  nav.main { display: flex; gap: 24px; flex-wrap: wrap; }
+  nav.main a { font-size: .92rem; font-weight: 500; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: border-color .2s; }
   nav.main a:hover, nav.main a.active { border-bottom-color: var(--forest); }
 
   /* ---------- Shared ---------- */
@@ -229,7 +229,7 @@
   .faq-answer { padding: 0 24px 18px; color: var(--soft); font-size: 0.98rem; display: none; line-height: 1.6; }
   .faq-item.active .faq-answer { display: block; }
 
-  /* ---------- Contact / Order Form ---------- */
+  /* ---------- Contact / Order / Feedback Form ---------- */
   .contact-top { padding: 50px 0 30px; text-align: center; max-width: 700px; margin: 0 auto; }
   .contact-top h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); margin-bottom: 16px; }
   
@@ -268,7 +268,7 @@
   @media (max-width: 900px) {
     header.site { padding: 16px 20px; }
     .site-title { font-size: 1.3rem; }
-    nav.main { gap: 18px; }
+    nav.main { gap: 14px; }
     .container { padding: 0 20px; }
     .hero { margin: 16px 14px 0; border-radius: 22px; }
     .hero-grid, .preview-box, .order-card { grid-template-columns: 1fr; padding: 36px 20px; gap: 28px; }
@@ -293,6 +293,7 @@
     <a href="#cases" data-go="cases">Case Files</a>
     <a href="#preview" data-go="preview">Sample Preview</a>
     <a href="#about" data-go="about">About</a>
+    <a href="#feedback" data-go="feedback">Submit Feedback</a>
     <a href="#order" data-go="order">Order Book</a>
   </nav>
 </header>
@@ -364,6 +365,9 @@
       <div style="text-align: center; max-width: 600px; margin: 0 auto 20px;">
         <h2>Verified Case Dispatches</h2>
         <p class="body-text" style="margin: 0 auto;">What early investigators and readers are saying about Part One of The Home Trilogy.</p>
+        <div style="margin-top: 20px;">
+          <a class="btn outline" href="#feedback" data-go="feedback">Submit Your Feedback</a>
+        </div>
       </div>
       <div class="reviews-grid">
         <div class="review-card">
@@ -573,6 +577,67 @@
   </div>
 </main>
 
+<!-- ======================= FEEDBACK FORM VIEW ======================= -->
+<main class="view" id="view-feedback">
+  <div class="container contact-top">
+    <h1>Reader Feedback &amp; Case Notes</h1>
+    <p class="body-text">Finished reading <em>Come Back Home</em>? Share your thoughts, review ratings, and investigative notes. Selected reviews will be featured on our dispatches board!</p>
+  </div>
+
+  <div class="order-container">
+    <div class="order-card">
+      <form class="order" id="feedbackForm" action="https://formsubmit.co/ajax/krystalgreen2709@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New Reader Feedback: Come Back Home">
+        <input type="hidden" name="_template" value="table">
+
+        <h3>Submit Your Review</h3>
+        <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">All fields are required to submit your dispatch.</p>
+
+        <div class="row">
+          <div>
+            <label for="fb_name">Your Name <small>(required)</small></label>
+            <input id="fb_name" name="Reader_Name" type="text" placeholder="e.g. Rhea Sharma" required>
+          </div>
+          <div>
+            <label for="fb_location">City &amp; State <small>(required)</small></label>
+            <input id="fb_location" name="Reader_Location" type="text" placeholder="e.g. Mumbai, Maharashtra" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="fb_rating">Rating <small>(required)</small></label>
+            <select id="fb_rating" name="Rating" required>
+              <option value="5 Stars (⭐⭐⭐⭐⭐)">5 Stars &mdash; Masterpiece</option>
+              <option value="4 Stars (⭐⭐⭐⭐)">4 Stars &mdash; Gripping Thriller</option>
+              <option value="3 Stars (⭐⭐⭐)">3 Stars &mdash; Good Read</option>
+              <option value="2 Stars (⭐⭐)">2 Stars &mdash; Average</option>
+              <option value="1 Star (⭐)">1 Star</option>
+            </select>
+          </div>
+          <div>
+            <label for="fb_verified">Reader Status <small>(required)</small></label>
+            <select id="fb_verified" name="Reader_Status" required>
+              <option value="Verified Paperback Buyer">Verified Paperback Buyer</option>
+              <option value="Sample Excerpt Reader">Sample Excerpt Reader</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="fb_message">Your Feedback / Review <small>(required)</small></label>
+          <textarea id="fb_message" name="Reader_Feedback" placeholder="What did you think of the plot, characters, and suspense?" required></textarea>
+        </div>
+
+        <div>
+          <button class="btn" type="submit" id="fbSubmitBtn" style="width: 100%; text-align: center; margin-top: 10px;">Submit Feedback</button>
+          <div class="form-note" id="fbFormNote"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
 <!-- ======================= ORDER FORM VIEW ======================= -->
 <main class="view" id="view-order">
   <div class="container contact-top">
@@ -768,7 +833,7 @@
   footMail.textContent = BOOK_EMAIL;
   footMail.href = 'mailto:' + BOOK_EMAIL;
 
-  const views = { home: 'view-home', cases: 'view-cases', preview: 'view-preview', about: 'view-about', order: 'view-order' };
+  const views = { home: 'view-home', cases: 'view-cases', preview: 'view-preview', about: 'view-about', feedback: 'view-feedback', order: 'view-order' };
   
   function show(name) {
     if (!views[name]) name = 'home';
@@ -823,62 +888,109 @@
   const otherContainer = document.getElementById('otherSourceContainer');
   const otherInput = document.getElementById('otherSourceInput');
 
-  sourceSelect.addEventListener('change', () => {
-    if (sourceSelect.value === 'Other') {
-      otherContainer.style.display = 'block';
-      otherInput.setAttribute('required', 'true');
-    } else {
-      otherContainer.style.display = 'none';
-      otherInput.removeAttribute('required');
-      otherInput.value = '';
-    }
-  });
+  if (sourceSelect) {
+    sourceSelect.addEventListener('change', () => {
+      if (sourceSelect.value === 'Other') {
+        otherContainer.style.display = 'block';
+        otherInput.setAttribute('required', 'true');
+      } else {
+        otherContainer.style.display = 'none';
+        otherInput.removeAttribute('required');
+        otherInput.value = '';
+      }
+    });
+  }
+
+  /* Feedback Form AJAX Submission Logic */
+  const feedbackForm = document.getElementById('feedbackForm');
+  const fbNote = document.getElementById('fbFormNote');
+  const fbSubmitBtn = document.getElementById('fbSubmitBtn');
+
+  if (feedbackForm) {
+    feedbackForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!feedbackForm.checkValidity()) {
+        fbNote.textContent = 'Please fill in all required fields correctly.';
+        fbNote.style.color = '#c0392b';
+        return;
+      }
+
+      fbSubmitBtn.disabled = true;
+      fbSubmitBtn.textContent = 'Submitting feedback...';
+      fbNote.style.color = 'var(--forest)';
+      fbNote.textContent = 'Sending your review...';
+
+      const formData = new FormData(feedbackForm);
+
+      try {
+        const response = await fetch(feedbackForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          feedbackForm.reset();
+          fbNote.style.color = 'var(--forest)';
+          fbNote.textContent = 'Thank you for your valuable feedback! Your review has been successfully submitted.';
+          fbSubmitBtn.textContent = 'Review Submitted Successfully!';
+        } else {
+          throw new Error('Server response was not ok');
+        }
+      } catch (err) {
+        fbNote.style.color = '#c0392b';
+        fbNote.textContent = 'Something went wrong. Please email your feedback directly to ' + BOOK_EMAIL;
+        fbSubmitBtn.disabled = false;
+        fbSubmitBtn.textContent = 'Submit Feedback';
+      }
+    });
+  }
 
   /* Order Form AJAX Submission Logic */
   const form = document.getElementById('orderForm');
   const note = document.getElementById('formNote');
   const submitBtn = document.getElementById('submitBtn');
   
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!form.checkValidity()) { 
-      note.textContent = 'Please fill in all required fields correctly.'; 
-      note.style.color = '#c0392b';
-      return; 
-    }
-    
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting order...';
-    note.style.color = 'var(--forest)';
-    note.textContent = 'Sending your order request...';
-
-    const formData = new FormData(form);
-    
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-      
-      if (response.ok) {
-        form.reset();
-        otherContainer.style.display = 'none';
-        note.style.color = 'var(--forest)';
-        note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
-        submitBtn.textContent = 'Order Submitted Successfully!';
-      } else {
-        throw new Error('Server response was not ok');
+  if (form) {
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!form.checkValidity()) { 
+        note.textContent = 'Please fill in all required fields correctly.'; 
+        note.style.color = '#c0392b';
+        return; 
       }
-    } catch (err) {
-      note.style.color = '#c0392b';
-      note.textContent = 'Something went wrong. Please email your details and payment screenshot directly to ' + BOOK_EMAIL;
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Order Request';
-    }
-  });
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting order...';
+      note.style.color = 'var(--forest)';
+      note.textContent = 'Sending your order request...';
+
+      const formData = new FormData(form);
+      
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        
+        if (response.ok) {
+          form.reset();
+          if (otherContainer) otherContainer.style.display = 'none';
+          note.style.color = 'var(--forest)';
+          note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
+          submitBtn.textContent = 'Order Submitted Successfully!';
+        } else {
+          throw new Error('Server response was not ok');
+        }
+      } catch (err) {
+        note.style.color = '#c0392b';
+        note.textContent = 'Something went wrong. Please email your details and payment screenshot directly to ' + BOOK_EMAIL;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Order Request';
+      }
+    });
+  }
 </script>
 </body>
 </html>
