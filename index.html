@@ -824,6 +824,18 @@
   </div>
 </footer>
 
+<!-- Easter Egg Decryption Modal -->
+<div class="lightbox-modal" id="easterEggModal" onclick="closeEasterEgg()">
+  <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 520px; text-align: center; padding: 36px 28px;">
+    <button class="lightbox-close" onclick="closeEasterEgg()">&times;</button>
+    <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--forest); margin-bottom: 10px; letter-spacing: 0.08em;">[ CLASSIFIED INTEL DECRYPTED ]</div>
+    <div style="font-family: var(--serif); font-size: 1.35rem; font-style: italic; color: var(--ink); line-height: 1.5; margin-bottom: 18px;">
+      &ldquo;The green fairy is watching. Book Two ('Back Home') will reveal what happened in the dark hours after Christine left Totin...&rdquo;
+    </div>
+    <div style="font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--forest);">&mdash; Krystal Green</div>
+  </div>
+</div>
+
 <script>
   /* ====== CONFIGURATION ====== */
   const BOOK_EMAIL = 'krystalgreen2709@gmail.com'; 
@@ -835,27 +847,41 @@
 
   const views = { home: 'view-home', cases: 'view-cases', preview: 'view-preview', about: 'view-about', feedback: 'view-feedback', order: 'view-order' };
   
-  function show(name) {
+  function show(name, pushHistory = true) {
     if (!views[name]) name = 'home';
     Object.entries(views).forEach(([k, id]) => document.getElementById(id).classList.toggle('active', k === name));
     document.querySelectorAll('nav.main a').forEach(a => a.classList.toggle('active', a.dataset.go === name));
     window.scrollTo(0, 0);
+
+    if (pushHistory) {
+      const targetHash = name === 'home' ? '#' : '#' + name;
+      if (location.hash !== targetHash) {
+        history.pushState({ view: name }, '', targetHash);
+      }
+    }
   }
 
+  // Handle Navbar and Button Navigation clicks
   document.querySelectorAll('[data-go]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
       const name = el.dataset.go;
-      show(name);
-      history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
+      show(name, true);
     });
   });
 
+  // Handle Browser Back / Forward buttons correctly
+  window.addEventListener('popstate', e => {
+    const hash = (location.hash || '').slice(1);
+    show(hash && views[hash] ? hash : 'home', false);
+  });
+
+  // Handle Initial Page Load with Hash
   const initialHash = (location.hash || '').slice(1);
   if (initialHash && views[initialHash]) {
-    show(initialHash);
+    show(initialHash, false);
   } else {
-    show('home');
+    show('home', false);
   }
 
   /* Lightbox Modal Functions */
@@ -870,6 +896,15 @@
     document.getElementById('lightboxModal').classList.remove('active');
   }
 
+  /* Easter Egg Modal Functions */
+  function triggerEasterEgg() {
+    document.getElementById('easterEggModal').classList.add('active');
+  }
+
+  function closeEasterEgg() {
+    document.getElementById('easterEggModal').classList.remove('active');
+  }
+
   /* FAQ Accordion Toggle */
   document.querySelectorAll('.faq-question').forEach(q => {
     q.addEventListener('click', () => {
@@ -877,11 +912,6 @@
       item.classList.toggle('active');
     });
   });
-
-  /* Secret Easter Egg Function */
-  function triggerEasterEgg() {
-    alert("CLASSIFIED DECRYPTED:\n\n\"The green fairy is watching. Book Two ('Back Home') will reveal what happened in the dark hours after Christine left Totin...\"\n\n— Krystal Green");
-  }
 
   /* Conditional Other Source Input */
   const sourceSelect = document.getElementById('source');
