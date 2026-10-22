@@ -263,13 +263,14 @@
   form.order input:focus, form.order select:focus, form.order textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,61,40,0.15); }
   .form-note { font-size: 1rem; margin-top: 14px; font-weight: 600; color: var(--forest); line-height: 1.5; }
 
-  /* ---------- Footer ---------- */
+  /* ---------- Footer & Web Dev Credit ---------- */
   footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); }
   .foot-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
   .foot-title { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: #fff; }
   .foot-mail { font-size: 1.1rem; color: var(--fresh); border-bottom: 1px solid transparent; }
   .foot-mail:hover { border-bottom-color: var(--fresh); }
   .foot-small { margin-top: 22px; font-size: .88rem; color: #A4C4A0; font-family: var(--mono); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+  .dev-credit { font-size: 0.8rem; color: #7f9f7a; font-family: var(--mono); letter-spacing: 0.02em; }
 
   /* Newsletter Box in Dispatch Modal */
   .dispatch-newsletter {
@@ -279,7 +280,9 @@
   .dispatch-newsletter p { font-size: 0.92rem; color: #d0e2cb; margin-bottom: 14px; }
   .dispatch-form { display: flex; gap: 8px; flex-wrap: wrap; }
   .dispatch-form input { flex: 1; min-width: 200px; padding: 10px 14px; border-radius: 99px; border: 1px solid var(--line); font-size: 0.9rem; outline: none; }
-  .dispatch-form button { background: var(--fresh); color: var(--ink); font-weight: 600; border: none; padding: 10px 20px; border-radius: 99px; cursor: pointer; }
+  .dispatch-form button { background: var(--fresh); color: var(--ink); font-weight: 600; border: none; padding: 10px 20px; border-radius: 99px; cursor: pointer; transition: background 0.2s; }
+  .dispatch-form button:hover { background: #b0e5a6; }
+  .dispatch-msg { margin-top: 10px; font-family: var(--sans); font-size: 0.88rem; color: var(--fresh); font-weight: 500; display: none; }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
@@ -851,6 +854,7 @@
   </div>
   <div class="foot-small">
     <span>&copy; 2026 Come Back Home &middot; Krystal Green &middot; ISBN 978-93-6012-157-0</span>
+    <span class="dev-credit">Website by Prathamesh Kadam</span>
   </div>
 </footer>
 
@@ -868,10 +872,11 @@
     <div class="dispatch-newsletter">
       <h3>The Investigator's Dispatch</h3>
       <p>Subscribe to receive classified case files, character dossiers, and early intelligence dispatches for Book 2 directly to your inbox.</p>
-      <form class="dispatch-form" onsubmit="event.preventDefault(); alert('Enlisted! Welcome to confidential intelligence dispatches.'); closeEasterEgg();">
-        <input type="email" placeholder="Enter your email address..." required>
-        <button type="submit">Enlist</button>
+      <form class="dispatch-form" id="dispatchSubscribeForm">
+        <input type="email" id="dispatchEmailInput" placeholder="Enter your email address..." required>
+        <button type="submit" id="dispatchSubmitBtn">Enlist</button>
       </form>
+      <div class="dispatch-msg" id="dispatchMsg">✓ Enlisted! Welcome to confidential intelligence dispatches.</div>
     </div>
   </div>
 </div>
@@ -970,10 +975,31 @@
     const icon = document.getElementById('eggIcon');
     const title = document.getElementById('eggMainTitle');
     const sub = document.getElementById('eggSubText');
+    const msg = document.getElementById('dispatchMsg');
+    
     icon.textContent = '🥚';
     icon.style.transform = 'rotate(0deg)';
     title.textContent = 'The Pristine Egg';
     sub.textContent = 'Click here to poke/crack the seal further! (Stage 1 of 4)';
+    if (msg) msg.style.display = 'none';
+  }
+
+  /* Dispatch Newsletter Inline Form Submission */
+  const dispatchForm = document.getElementById('dispatchSubscribeForm');
+  const dispatchMsg = document.getElementById('dispatchMsg');
+  const dispatchEmailInput = document.getElementById('dispatchEmailInput');
+
+  if (dispatchForm) {
+    dispatchForm.addEventListener('submit', e => {
+      e.preventDefault();
+      if (dispatchEmailInput.value) {
+        dispatchMsg.style.display = 'block';
+        dispatchEmailInput.value = '';
+        setTimeout(() => {
+          closeEasterEgg();
+        }, 2500);
+      }
+    });
   }
 
   /* FAQ Accordion Toggle */
