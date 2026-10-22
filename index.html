@@ -249,6 +249,7 @@
   .price-breakdown { background: rgba(194,229,184,0.3); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin-top: 24px; margin-bottom: 12px; font-size: 0.96rem; }
   .price-row { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--soft); }
   .price-row.total { font-weight: 700; color: var(--forest); font-family: var(--serif); font-size: 1.3rem; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; }
+  .shipping-disclaimer { font-size: 0.8rem; color: var(--muted); font-style: italic; margin-top: 8px; line-height: 1.4; border-top: 1px dashed var(--line); padding-top: 6px; }
 
   form.order { display: grid; gap: 20px; }
   form.order .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -327,7 +328,7 @@
         <div class="pricing-badge">
           <span class="old-price">&#8377;399</span>
           <span class="current-price">&#8377;349</span>
-          <span class="shipping-note">+ India Post Shipping</span>
+          <span class="shipping-note">+ India Post Shipping (from Gorakhpur, UP)</span>
         </div>
 
         <p class="body-text" style="margin-top: 14px;">23-year-old Christine Tavley is searching for the truth behind the explosion that wiped her hometown off the map &mdash; and the serial bomber hiding behind the symbol of a green fairy.</p>
@@ -664,7 +665,7 @@
 <main class="view" id="view-order">
   <div class="container contact-top">
     <h1>Order Your Paperback Copy</h1>
-    <p class="body-text">Fill out your shipping and payment details below. Paperback Price: <strong>&#8377;349</strong> + India Post shipping.</p>
+    <p class="body-text">Fill out your shipping and payment details below. Dispatched from <strong>Gorakhpur, Uttar Pradesh</strong> via India Post.</p>
   </div>
 
   <!-- FAQ Accordion Section -->
@@ -672,18 +673,18 @@
     <div class="faq-title">Frequently Asked Questions</div>
     
     <div class="faq-item">
-      <div class="faq-question">How long does shipping take across India?</div>
-      <div class="faq-answer">Orders are typically dispatched via India Post within 2-3 business days. Standard delivery across India takes approximately 5 to 7 business days depending on your location.</div>
+      <div class="faq-question">Where are orders dispatched from?</div>
+      <div class="faq-answer">All paperback orders are carefully packaged and dispatched directly from Gorakhpur, Uttar Pradesh.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How is shipping calculated and how long does it take?</div>
+      <div class="faq-answer">Shipping is calculated automatically based on India Post distance slabs from Gorakhpur, UP. Standard delivery across India takes approximately 5 to 7 business days. (Note: If the delivery agent changes, rates may differ.)</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">How is my payment verified after scanning the QR code?</div>
       <div class="faq-answer">Once you complete the UPI payment for the calculated grand total, enter your exact UTR / Transaction ID in the form and upload your payment screenshot. Our team verifies the transaction reference against our statement before dispatching your book.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Will I receive tracking details for my shipment?</div>
-      <div class="faq-answer">Yes! Once your paperback copy is packed and dispatched via India Post, tracking numbers and dispatch updates will be sent directly to your registered email address.</div>
     </div>
   </section>
 
@@ -698,7 +699,7 @@
         <input type="hidden" name="_template" value="table">
 
         <h3>Step 1: Shipping Details &amp; Location</h3>
-        <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">Fill in your delivery address to automatically calculate exact India Post shipping charges.</p>
+        <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">Fill in your delivery address to automatically calculate exact India Post shipping charges from Gorakhpur, UP.</p>
 
         <div class="row">
           <div>
@@ -732,6 +733,7 @@
             <label for="state">State (India) <small>(required)</small></label>
             <select id="state" name="State" required>
               <option value="">Select State / UT</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
               <option value="Maharashtra">Maharashtra</option>
               <option value="Andhra Pradesh">Andhra Pradesh</option>
               <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -757,7 +759,6 @@
               <option value="Tamil Nadu">Tamil Nadu</option>
               <option value="Telangana">Telangana</option>
               <option value="Tripura">Tripura</option>
-              <option value="Uttar Pradesh">Uttar Pradesh</option>
               <option value="Uttarakhand">Uttarakhand</option>
               <option value="West Bengal">West Bengal</option>
               <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
@@ -808,13 +809,14 @@
         <!-- Dynamic India Post Price & Shipping Breakdown Calculator -->
         <div class="price-breakdown">
           <div class="price-row"><span>Book Subtotal (&#8377;349 &times; <span id="qtyDisplay">1</span>)</span><span id="bookSubtotal">&#8377;349</span></div>
-          <div class="price-row"><span>India Post Tariff (<span id="shippingLocLabel">Select State</span>)</span><span id="shippingCost">&#8377;60</span></div>
-          <div class="price-row total"><span>Grand Total to Pay</span><span id="grandTotal">&#8377;409</span></div>
+          <div class="price-row"><span>India Post Tariff (<span id="shippingLocLabel">Select State</span>)</span><span id="shippingCost">&#8377;55</span></div>
+          <div class="price-row total"><span>Grand Total to Pay</span><span id="grandTotal">&#8377;404</span></div>
+          <div class="shipping-disclaimer">*Note: Shipping price is calculated based on India Post tariffs dispatched from Gorakhpur, UP. If the delivery agent changes, rates may differ.</div>
         </div>
 
         <!-- Payment Step -->
         <div class="payment-box">
-          <h3>Step 2: Scan &amp; Pay Exact Total (<span id="payAmountBox">&#8377;409</span>)</h3>
+          <h3>Step 2: Scan &amp; Pay Exact Total (<span id="payAmountBox">&#8377;404</span>)</h3>
           <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm for the exact Grand Total above, then enter your UTR ID and upload your payment receipt screenshot below.</p>
           <div class="qr-placeholder">
             [ Insert QR Code Image Here ]
@@ -1000,7 +1002,7 @@
     });
   }
 
-  /* Dynamic India Post Shipping Calculator Matrix */
+  /* Dynamic India Post Shipping Calculator Matrix (Gorakhpur, UP Origin) */
   const stateSelect = document.getElementById('state');
   const quantityInput = document.getElementById('quantity');
   const qtyDisplay = document.getElementById('qtyDisplay');
@@ -1012,27 +1014,27 @@
   const formSubject = document.getElementById('formSubject');
 
   function calculateIndiaPostShipping(selectedState, qty) {
-    if (!selectedState) return { baseRate: 60, label: 'Standard India Post' };
+    if (!selectedState) return { baseRate: 55, label: 'Standard India Post (UP Hub)' };
 
-    // Zone 1: Home / Local State
-    if (selectedState === 'Maharashtra') {
-      return { baseRate: 35 + (qty - 1) * 15, label: 'Local (Maharashtra)' };
+    // Zone 1: Local State (Uttar Pradesh - Gorakhpur Dispatch)
+    if (selectedState === 'Uttar Pradesh') {
+      return { baseRate: 35 + (qty - 1) * 15, label: 'Local UP (Gorakhpur Hub)' };
     }
     
-    // Zone 2: Neighboring & Nearby States (up to 500-1000km)
-    const nearbyStates = ['Gujarat', 'Goa', 'Madhya Pradesh', 'Karnataka', 'Chhattisgarh', 'Dadra and Nagar Haveli and Daman and Diu'];
+    // Zone 2: Neighboring States (Bihar, MP, Delhi, Haryana, Uttarakhand, Jharkhand, Chhattisgarh)
+    const nearbyStates = ['Bihar', 'Madhya Pradesh', 'Uttarakhand', 'Delhi', 'Haryana', 'Jharkhand', 'Chhattisgarh'];
     if (nearbyStates.includes(selectedState)) {
-      return { baseRate: 60 + (qty - 1) * 25, label: 'Zone A (Nearby States)' };
+      return { baseRate: 55 + (qty - 1) * 20, label: 'Zone A (Nearby States from UP)' };
     }
 
     // Zone 3: Special / Remote States & Island Union Territories
-    const remoteStates = ['Assam', 'Arunachal Pradesh', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Sikkim', 'Tripura', 'Jammu and Kashmir', 'Ladakh', 'Andaman and Nicobar Islands', 'Lakshadweep'];
+    const remoteStates = ['Assam', 'Arunachal Pradesh', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Sikkim', 'Tripura', 'Jammu and Kashmir', 'Ladakh', 'Andaman and Nicobar Islands', 'Lakshadweep', 'Kerala', 'Tamil Nadu'];
     if (remoteStates.includes(selectedState)) {
-      return { baseRate: 110 + (qty - 1) * 40, label: 'Special Zone (Remote/Island)' };
+      return { baseRate: 105 + (qty - 1) * 35, label: 'Special/Distant Zone (India Post)' };
     }
 
-    // Zone 4: Rest of India (1000km+)
-    return { baseRate: 85 + (qty - 1) * 30, label: 'Zone B (Rest of India)' };
+    // Zone 4: Rest of India
+    return { baseRate: 75 + (qty - 1) * 25, label: 'Zone B (Rest of India)' };
   }
 
   function updatePricing() {
