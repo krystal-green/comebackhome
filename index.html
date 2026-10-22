@@ -111,13 +111,13 @@
   .spec-card { background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: 0.9rem; }
   .spec-card strong { display: block; color: var(--forest); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  /* ---------- Home: pull quote ---------- */
-  .pull { text-align: center; padding: 80px 24px 60px; }
-  .pull blockquote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.9rem, 3.4vw, 2.7rem); max-width: 24ch; margin: 0 auto; line-height: 1.25; color: var(--forest); }
+  /* ---------- Home: pull quote (Single Line) ---------- */
+  .pull { text-align: center; padding: 70px 24px 50px; overflow-x: auto; }
+  .pull blockquote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.4rem, 2.3vw, 2.3rem); white-space: nowrap; display: inline-block; margin: 0 auto; line-height: 1.25; color: var(--forest); }
 
   /* ---------- Home: story ---------- */
   .story { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; padding: 10px 0 80px; align-items: start; }
-  .story h2 { font-size: clamp(2.4rem, 4vw, 3.4rem); }
+  .story h2 { font-size: clamp(2.2rem, 3.6vw, 3.2rem); }
   .story p { font-size: 1.1rem; color: var(--soft); margin-bottom: 18px; max-width: 62ch; }
   .story .hook { color: var(--ink); font-weight: 600; font-family: var(--serif); font-size: 1.25rem; border-left: 3px solid var(--forest); padding-left: 16px; margin-top: 24px; }
 
@@ -132,11 +132,11 @@
   .tri-item.live { background: var(--leaf); border-color: var(--fresh); }
   .tri-item.live .s { color: var(--forest); font-weight: 600; }
 
-  /* ---------- Case Files (News Postcards) + Lightbox ---------- */
-  .case-files-section { padding: 60px 0 80px; border-top: 1px solid var(--line); background: rgba(194, 229, 184, 0.15); }
-  .case-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
-  .case-header h2 { font-size: clamp(2.4rem, 4vw, 3.2rem); margin-bottom: 14px; }
-  .case-header p { color: var(--soft); font-size: 1.05rem; }
+  /* ---------- Archive Section + Lightbox ---------- */
+  .archive-section { padding: 60px 0 80px; border-top: 1px solid var(--line); background: rgba(194, 229, 184, 0.15); }
+  .archive-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
+  .archive-header h2 { font-size: clamp(2.4rem, 4vw, 3.2rem); margin-bottom: 14px; }
+  .archive-header p { color: var(--soft); font-size: 1.05rem; }
   .dossier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
   .dossier-card {
     background: var(--dossier); border: 1px solid var(--line); border-radius: 12px; padding: 18px;
@@ -144,23 +144,23 @@
   }
   .dossier-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(13,36,24,0.15); }
   .dossier-card::before {
-    content: "CLICK TO INSPECT EVIDENCE"; position: absolute; top: -10px; right: 20px; background: var(--forest); color: #fff;
+    content: "CLICK TO ENLARGE & INSPECT"; position: absolute; top: -10px; right: 20px; background: var(--forest); color: #fff;
     font-family: var(--mono); font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.05em;
   }
-  .dossier-card img { width: 100%; border-radius: 6px; border: 1px solid #d0e2cb; margin-bottom: 14px; }
+  .dossier-card img { width: 100%; border-radius: 6px; border: 1px solid #d0e2cb; margin-bottom: 14px; pointer-events: none; -webkit-user-select: none; user-select: none; }
   .dossier-title { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
   .dossier-date { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
   .dossier-desc { font-size: 0.95rem; color: var(--soft); line-height: 1.5; }
 
-  /* Lightbox Modal */
+  /* Lightbox Modal (Enlarged & Protected) */
   .lightbox-modal {
-    display: none; position: fixed; inset: 0; background: rgba(13,36,24,0.85); z-index: 1000;
-    align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(5px);
+    display: none; position: fixed; inset: 0; background: rgba(13,36,24,0.9); z-index: 1000;
+    align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(6px);
   }
   .lightbox-modal.active { display: flex; }
-  .lightbox-content { background: var(--dossier); padding: 20px; border-radius: 16px; max-width: 800px; width: 100%; position: relative; border: 1px solid var(--line); box-shadow: 0 25px 60px rgba(0,0,0,0.5); }
-  .lightbox-content img { width: 100%; max-height: 75vh; object-fit: contain; border-radius: 8px; }
-  .lightbox-close { position: absolute; top: 12px; right: 16px; background: var(--forest); color: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .lightbox-content { background: var(--dossier); padding: 24px; border-radius: 16px; max-width: 950px; width: 100%; position: relative; border: 1px solid var(--line); box-shadow: 0 25px 60px rgba(0,0,0,0.6); }
+  .lightbox-content img { width: 100%; max-height: 82vh; object-fit: contain; border-radius: 8px; pointer-events: none; -webkit-user-select: none; user-select: none; }
+  .lightbox-close { position: absolute; top: 12px; right: 16px; background: var(--forest); color: #fff; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
   /* ---------- Verified Case Dispatches (Reviews) ---------- */
   .reviews-section { padding: 70px 0; border-top: 1px solid var(--line); }
@@ -242,6 +242,11 @@
   .payment-box p { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
   .qr-placeholder { width: 160px; height: 160px; background: #fff; margin: 0 auto 12px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); border-radius: 8px; }
 
+  /* Dynamic Price Breakdown Box */
+  .price-breakdown { background: rgba(194,229,184,0.25); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; font-size: 0.95rem; }
+  .price-row { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--soft); }
+  .price-row.total { font-weight: 700; color: var(--forest); font-family: var(--serif); font-size: 1.25rem; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; }
+
   form.order { display: grid; gap: 20px; }
   form.order .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   form.order label { display: block; font-size: .92rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
@@ -261,7 +266,7 @@
   .foot-mail { font-size: 1.1rem; color: var(--fresh); border-bottom: 1px solid transparent; }
   .foot-mail:hover { border-bottom-color: var(--fresh); }
   .foot-small { margin-top: 22px; font-size: .88rem; color: #A4C4A0; font-family: var(--mono); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-  .easter-egg-btn { background: rgba(148,209,137,0.2); border: 1px dashed var(--fresh); color: var(--fresh); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-family: var(--mono); transition: background .2s; }
+  .easter-egg-btn { background: rgba(148,209,137,0.2); border: 1px dashed var(--fresh); color: var(--fresh); padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; cursor: pointer; font-family: var(--mono); transition: background .2s; }
   .easter-egg-btn:hover { background: var(--fresh); color: var(--ink); }
 
   /* ---------- Responsive ---------- */
@@ -277,7 +282,7 @@
     .story, .band-grid, .about-top { grid-template-columns: 1fr; gap: 32px; }
     .about-block { padding: 40px 0; }
     .tri-grid { grid-template-columns: 1fr; }
-    .pull { padding: 64px 20px 56px; }
+    .pull { padding: 54px 16px; }
     form.order .row { grid-template-columns: 1fr; }
     footer.site { padding: 40px 20px 28px; }
     .foot-title { font-size: 1.6rem; }
@@ -290,11 +295,11 @@
   <div class="site-title" data-go="home">Come Back Home</div>
   <nav class="main">
     <a href="#home" data-go="home" class="active">Home</a>
-    <a href="#cases" data-go="cases">Case Files</a>
     <a href="#preview" data-go="preview">Sample Preview</a>
-    <a href="#about" data-go="about">About</a>
-    <a href="#feedback" data-go="feedback">Submit Feedback</a>
     <a href="#order" data-go="order">Order Book</a>
+    <a href="#cases" data-go="cases">Archive</a>
+    <a href="#feedback" data-go="feedback">Feedback</a>
+    <a href="#about" data-go="about">About</a>
   </nav>
 </header>
 
@@ -304,7 +309,7 @@
   <section class="hero">
     <div class="hero-grid">
       <div>
-        <div class="hero-eyebrow">Part One of The Home Trilogy &bull; Crime Thriller &amp; Suspense</div>
+        <div class="hero-eyebrow">Part One of The Home Trilogy &bull; Character Driven Mystery</div>
         <h1>When everything is lost, where are you found?</h1>
         <div class="hero-book">Come Back Home<small>A novel by Krystal Green</small></div>
         
@@ -317,7 +322,7 @@
         <p class="body-text" style="margin-top: 14px;">23-year-old Christine Tavley is searching for the truth behind the explosion that wiped her hometown off the map &mdash; and the serial bomber hiding behind the symbol of a green fairy.</p>
         
         <div class="book-specs">
-          <div class="spec-card"><strong>Genre</strong> Crime Thriller</div>
+          <div class="spec-card"><strong>Genre</strong> Character driven mystery</div>
           <div class="spec-card"><strong>Format</strong> Paperback</div>
           <div class="spec-card"><strong>Language</strong> English</div>
           <div class="spec-card"><strong>Publisher</strong> Independent</div>
@@ -342,7 +347,7 @@
 
   <div class="container">
     <section class="story">
-      <h2>The Story</h2>
+      <h2>An explosion that changed everything</h2>
       <div>
         <p>23-year-old Christine Tavley has been searching for the truth behind the incident that destroyed her life five years ago. The explosion of 22nd March 1982 wiped her hometown, Totin, off the map. It was the beginning of the serial bomber known as Absinthe. Hiding behind the symbol of a green fairy, Absinthe comes alive with a broadcast. Two weeks later, another town vanishes just like Totin.</p>
         <p>Christine's survival is fueled by the people she has left, the old memories, and the hope that she will one day get to the bottom of what Absinthe really wants. She visits the deserted town in search of answers which ultimately forces her to look closer than she expected. Getting closer to the truth feels freeing &mdash; until she overhears something she wasn't supposed to.</p>
@@ -389,14 +394,14 @@
     </section>
   </div>
 
-  <!-- Case Files Preview Banner -->
-  <section class="case-files-section" style="margin-top: 60px;">
+  <!-- Archive Preview Banner -->
+  <section class="archive-section" style="margin-top: 60px;">
     <div class="container">
-      <div class="case-header">
+      <div class="archive-header">
         <h2>Classified Evidence &amp; News Archives</h2>
         <p>Explore the recovered newspaper clippings, police reports, and broadcasts surrounding the Absinthe bombings that shaped Christine's world.</p>
         <div style="margin-top: 20px;">
-          <a class="btn" href="#cases" data-go="cases">View All Case Files</a>
+          <a class="btn" href="#cases" data-go="cases">View Full Archive</a>
         </div>
       </div>
     </div>
@@ -435,12 +440,12 @@
   </section>
 </main>
 
-<!-- ======================= CASE FILES VIEW ======================= -->
+<!-- ======================= ARCHIVE VIEW ======================= -->
 <main class="view" id="view-cases">
   <div class="container" style="padding: 60px 48px;">
-    <div class="case-header">
-      <h2>The Absinthe Case Files</h2>
-      <p>Archived news reports and investigative records recovered from the Morganite Courier and regional dispatches (1982&ndash;1987). Click any postcard to inspect in full-screen detail.</p>
+    <div class="archive-header">
+      <h2>The Absinthe Archive</h2>
+      <p>Archived news reports and investigative records recovered from the Morganite Courier and regional dispatches (1982&ndash;1987). Click any postcard to inspect in enlarged full-screen detail.</p>
     </div>
 
     <div class="dossier-grid">
@@ -509,14 +514,14 @@
     <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
     <div id="lightboxTitle" style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 8px; color: var(--ink);"></div>
     <div id="lightboxDate" style="font-family: var(--mono); font-size: 0.85rem; color: var(--muted); margin-bottom: 14px;"></div>
-    <img id="lightboxImg" src="" alt="Enlarged Case File">
+    <img id="lightboxImg" src="" alt="Enlarged Archive Record">
   </div>
 </div>
 
 <!-- ======================= SAMPLE PREVIEW VIEW ======================= -->
 <main class="view" id="view-preview">
   <div class="container" style="padding: 60px 48px;">
-    <div class="case-header">
+    <div class="archive-header">
       <h2>Read a Sample Preview</h2>
       <p>Immerse yourself in the opening pages of <em>Come Back Home</em> and experience Christine's world before making your purchase.</p>
     </div>
@@ -555,7 +560,7 @@
       </div>
     </section>
 
-    <!-- Editor Bio (Uncommented and using Prathamesh.jpeg) -->
+    <!-- Editor Bio -->
     <section class="about-block">
       <div class="about-top">
         <div>
@@ -566,7 +571,7 @@
       </div>
     </section>
 
-    <!-- Cover Designer Bio (Using Aditi.jpeg) -->
+    <!-- Cover Designer Bio -->
     <section class="about-block">
       <div class="about-top">
         <div>
@@ -671,21 +676,20 @@
   <div class="order-container">
     <div class="order-card">
       
-      <!-- Payment QR Section -->
+      <!-- Payment QR Section (UPI ID removed) -->
       <div class="payment-box">
-        <h3>Step 1: Scan &amp; Pay (&#8377;349 + Shipping)</h3>
-        <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment, then enter your UTR / Transaction ID, upload your payment screenshot, and submit below.</p>
+        <h3>Step 1: Scan &amp; Pay</h3>
+        <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment (&#8377;349 + calculated shipping), then enter your UTR / Transaction ID and upload your payment screenshot below.</p>
         <div class="qr-placeholder">
           [ Insert QR Code Image Here ]
         </div>
-        <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">(Or transfer to UPI ID: <code>krystalgreen2709@oksbi</code>)</p>
       </div>
 
       <!-- Order Form (Direct AJAX Submission to FormSubmit) -->
       <form class="order" id="orderForm" action="https://formsubmit.co/ajax/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
         
         <!-- FormSubmit Configuration Inputs -->
-        <input type="hidden" name="_subject" value="New Book Order Request: Come Back Home (&#8377;349)">
+        <input type="hidden" name="_subject" id="formSubject" value="New Book Order Request: Come Back Home">
         <input type="hidden" name="_template" value="table">
 
         <h3>Step 2: Shipping &amp; Order Details</h3>
@@ -785,6 +789,13 @@
           </div>
         </div>
 
+        <!-- Live Price & Shipping Breakdown Calculator -->
+        <div class="price-breakdown">
+          <div class="price-row"><span>Book Price (&#8377;349 &times; <span id="qtyDisplay">1</span>)</span><span id="bookSubtotal">&#8377;349</span></div>
+          <div class="price-row"><span>Estimated Shipping across India</span><span id="shippingCost">&#8377;50</span></div>
+          <div class="price-row total"><span>Total Amount to Pay</span><span id="grandTotal">&#8377;399</span></div>
+        </div>
+
         <div>
           <label for="payment_screenshot">Upload Payment Screenshot <small>(required)</small></label>
           <input id="payment_screenshot" name="Payment_Screenshot" type="file" accept="image/*" required style="padding: 9px;">
@@ -823,17 +834,17 @@
   </div>
   <div class="foot-small">
     <span>&copy; 2026 Come Back Home &middot; Krystal Green &middot; ISBN 978-93-6012-157-0</span>
-    <button class="easter-egg-btn" onclick="triggerEasterEgg()">🔓 Confidential Clearance #1982</button>
+    <button class="easter-egg-btn" onclick="triggerEasterEgg()">🔓 What happened BEFORE the explosion of TOTIN</button>
   </div>
 </footer>
 
 <!-- Easter Egg Decryption Modal -->
 <div class="lightbox-modal" id="easterEggModal" onclick="closeEasterEgg()">
-  <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 520px; text-align: center; padding: 36px 28px;">
+  <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 540px; text-align: center; padding: 40px 32px;">
     <button class="lightbox-close" onclick="closeEasterEgg()">&times;</button>
-    <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--forest); margin-bottom: 10px; letter-spacing: 0.08em;">[ CLASSIFIED INTEL DECRYPTED ]</div>
-    <div style="font-family: var(--serif); font-size: 1.35rem; font-style: italic; color: var(--ink); line-height: 1.5; margin-bottom: 18px;">
-      &ldquo;The green fairy is watching. Book Two ('Back Home') will reveal what happened in the dark hours after Christine left Totin...&rdquo;
+    <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--fresh); margin-bottom: 12px; letter-spacing: 0.1em;">[ CLASSIFIED FILE DECRYPTED &bull; EYES ONLY ]</div>
+    <div style="font-family: var(--serif); font-size: 1.35rem; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 20px;">
+      &ldquo;Before the smoke cleared over Totin on March 22, 1982, a single coded transmission echoed across the valley. The green fairy didn't just appear&mdash;she was invited. Book Two ('Back Home') will finally unmask who was listening on the other end of the line...&rdquo;
     </div>
     <div style="font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--forest);">&mdash; Krystal Green</div>
   </div>
@@ -934,6 +945,37 @@
     });
   }
 
+  /* Dynamic Shipping & Total Calculator */
+  const quantityInput = document.getElementById('quantity');
+  const qtyDisplay = document.getElementById('qtyDisplay');
+  const bookSubtotal = document.getElementById('bookSubtotal');
+  const shippingCost = document.getElementById('shippingCost');
+  const grandTotal = document.getElementById('grandTotal');
+  const formSubject = document.getElementById('formSubject');
+
+  function updatePricing() {
+    const qty = Math.max(1, parseInt(quantityInput.value) || 1);
+    const subtotal = 349 * qty;
+    // Shipping: ₹50 for the 1st book + ₹30 for each additional book
+    const shipping = 50 + (qty - 1) * 30;
+    const total = subtotal + shipping;
+
+    qtyDisplay.textContent = qty;
+    bookSubtotal.textContent = '₹' + subtotal;
+    shippingCost.textContent = '₹' + shipping;
+    grandTotal.textContent = '₹' + total;
+
+    if (formSubject) {
+      formSubject.value = `New Book Order Request: Come Back Home (Qty: ${qty}, Total: ₹${total})`;
+    }
+  }
+
+  if (quantityInput) {
+    quantityInput.addEventListener('input', updatePricing);
+    quantityInput.addEventListener('change', updatePricing);
+    updatePricing();
+  }
+
   /* Feedback Form AJAX Submission Logic */
   const feedbackForm = document.getElementById('feedbackForm');
   const fbNote = document.getElementById('fbFormNote');
@@ -1010,6 +1052,7 @@
         if (response.ok) {
           form.reset();
           if (otherContainer) otherContainer.style.display = 'none';
+          updatePricing();
           note.style.color = 'var(--forest)';
           note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
           submitBtn.textContent = 'Order Submitted Successfully!';
