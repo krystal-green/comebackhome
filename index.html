@@ -111,7 +111,7 @@
   .spec-card { background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: 0.9rem; }
   .spec-card strong { display: block; color: var(--forest); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  /* ---------- Home: pull quote (Single Line) ---------- */
+  /* ---------- Home: pull quote ---------- */
   .pull { text-align: center; padding: 70px 24px 50px; overflow-x: auto; }
   .pull blockquote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.4rem, 2.3vw, 2.3rem); white-space: nowrap; display: inline-block; margin: 0 auto; line-height: 1.25; color: var(--forest); }
 
@@ -171,17 +171,6 @@
   .review-author { font-size: 0.9rem; font-weight: 600; color: var(--forest); }
   .review-location { font-size: 0.82rem; color: var(--muted); font-family: var(--mono); }
 
-  /* ---------- Newsletter Box ("The Investigator's Dispatch") ---------- */
-  .newsletter-section { background: var(--forest); color: #fff; padding: 64px 24px; text-align: center; border-top: 1px solid var(--line); }
-  .newsletter-container { max-width: 600px; margin: 0 auto; }
-  .newsletter-container h2 { font-family: var(--serif); font-size: 2.2rem; color: #fff; margin-bottom: 12px; }
-  .newsletter-container p { color: #d0e2cb; font-size: 1.02rem; margin-bottom: 24px; }
-  .newsletter-form { display: flex; gap: 10px; max-width: 500px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
-  .newsletter-form input { flex: 1; min-width: 260px; padding: 12px 18px; border-radius: 99px; border: 1px solid var(--line); font-family: inherit; font-size: 1rem; outline: none; }
-  .newsletter-form button { background: var(--fresh); color: var(--ink); font-weight: 600; border: none; padding: 12px 28px; border-radius: 99px; cursor: pointer; transition: background .2s; }
-  .newsletter-form button:hover { background: #fff; }
-  .newsletter-note { font-size: 0.85rem; color: #a4c4a0; margin-top: 10px; font-family: var(--mono); }
-
   /* ---------- Sample Preview Section ---------- */
   .preview-section { padding: 80px 0; border-top: 1px solid var(--line); background: var(--mist); }
   .preview-box {
@@ -236,7 +225,7 @@
   .order-container { max-width: 900px; margin: 0 auto 80px; padding: 0 24px; }
   .order-card { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 48px; box-shadow: 0 20px 40px rgba(13,36,24,0.06); }
   
-  /* QR Code Payment Box */
+  /* Payment Box */
   .payment-box { background: var(--mist); border: 1px dashed var(--forest); border-radius: 16px; padding: 24px; margin-bottom: 28px; text-align: center; }
   .payment-box h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--forest); margin-bottom: 8px; }
   .payment-box p { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
@@ -259,15 +248,34 @@
   form.order input:focus, form.order select:focus, form.order textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,61,40,0.15); }
   .form-note { font-size: 1rem; margin-top: 14px; font-weight: 600; color: var(--forest); line-height: 1.5; }
 
-  /* ---------- Footer ---------- */
-  footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); }
+  /* ---------- Footer & Interactive Easter Egg Seal ---------- */
+  footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); position: relative; }
   .foot-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
   .foot-title { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: #fff; }
   .foot-mail { font-size: 1.1rem; color: var(--fresh); border-bottom: 1px solid transparent; }
   .foot-mail:hover { border-bottom-color: var(--fresh); }
   .foot-small { margin-top: 22px; font-size: .88rem; color: #A4C4A0; font-family: var(--mono); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-  .easter-egg-btn { background: rgba(148,209,137,0.2); border: 1px dashed var(--fresh); color: var(--fresh); padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; cursor: pointer; font-family: var(--mono); transition: background .2s; }
-  .easter-egg-btn:hover { background: var(--fresh); color: var(--ink); }
+
+  /* Cracked Seal Easter Egg Widget */
+  .egg-seal-widget {
+    display: inline-flex; align-items: center; gap: 10px; background: rgba(148,209,137,0.1);
+    border: 1px solid rgba(148,209,137,0.3); padding: 8px 14px; border-radius: 100px; cursor: pointer;
+    user-select: none; transition: all 0.2s ease;
+  }
+  .egg-seal-widget:hover { background: rgba(148,209,137,0.22); border-color: var(--fresh); transform: scale(1.02); }
+  .egg-seal-widget:active { transform: scale(0.96); }
+  .egg-icon { font-size: 1.3rem; line-height: 1; transition: transform 0.15s ease; }
+  .egg-label { font-family: var(--mono); font-size: 0.76rem; color: var(--fresh); letter-spacing: 0.05em; }
+
+  /* Newsletter Box in Dispatch Modal */
+  .dispatch-newsletter {
+    background: var(--forest); color: #fff; padding: 24px; border-radius: 16px; margin-top: 24px; text-align: left; border: 1px solid var(--fresh);
+  }
+  .dispatch-newsletter h3 { font-family: var(--serif); font-size: 1.5rem; color: #fff; margin-bottom: 6px; }
+  .dispatch-newsletter p { font-size: 0.92rem; color: #d0e2cb; margin-bottom: 14px; }
+  .dispatch-form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .dispatch-form input { flex: 1; min-width: 200px; padding: 10px 14px; border-radius: 99px; border: 1px solid var(--line); font-size: 0.9rem; outline: none; }
+  .dispatch-form button { background: var(--fresh); color: var(--ink); font-weight: 600; border: none; padding: 10px 20px; border-radius: 99px; cursor: pointer; }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
@@ -404,19 +412,6 @@
           <a class="btn" href="#cases" data-go="cases">View Full Archive</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Newsletter Signup: The Investigator's Dispatch -->
-  <section class="newsletter-section">
-    <div class="newsletter-container">
-      <h2>The Investigator's Dispatch</h2>
-      <p>Want early intelligence on Book 2 (*Back Home*)? Join the confidential mailing list for exclusive character dossiers, secret teasers, and launch alerts directly to your inbox.</p>
-      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to confidential intelligence dispatches!'); this.reset();">
-        <input type="email" placeholder="Enter your email address..." required>
-        <button type="submit">Enlist Now</button>
-      </form>
-      <div class="newsletter-note">Zero spam. Only classified updates. Unsubscribe anytime.</div>
     </div>
   </section>
 
@@ -676,7 +671,7 @@
   <div class="order-container">
     <div class="order-card">
       
-      <!-- Payment QR Section (UPI ID removed) -->
+      <!-- Payment QR Section -->
       <div class="payment-box">
         <h3>Step 1: Scan &amp; Pay</h3>
         <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment (&#8377;349 + calculated shipping), then enter your UTR / Transaction ID and upload your payment screenshot below.</p>
@@ -834,19 +829,34 @@
   </div>
   <div class="foot-small">
     <span>&copy; 2026 Come Back Home &middot; Krystal Green &middot; ISBN 978-93-6012-157-0</span>
-    <button class="easter-egg-btn" onclick="triggerEasterEgg()">🔓 What happened BEFORE the explosion of TOTIN</button>
+    
+    <!-- Interactive Cracked Seal Easter Egg Widget -->
+    <div class="egg-seal-widget" id="eggSealWidget" onclick="crackEasterEgg()">
+      <span class="egg-icon" id="eggIcon">🥚</span>
+      <span class="egg-label" id="eggLabel">CRACK SEAL TO DECRYPT INTEL (25%)</span>
+    </div>
   </div>
 </footer>
 
-<!-- Easter Egg Decryption Modal -->
+<!-- Easter Egg Crack Disclosure Modal: The Investigator's Dispatch -->
 <div class="lightbox-modal" id="easterEggModal" onclick="closeEasterEgg()">
-  <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 540px; text-align: center; padding: 40px 32px;">
+  <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 580px; text-align: center; padding: 40px 32px;">
     <button class="lightbox-close" onclick="closeEasterEgg()">&times;</button>
-    <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--fresh); margin-bottom: 12px; letter-spacing: 0.1em;">[ CLASSIFIED FILE DECRYPTED &bull; EYES ONLY ]</div>
-    <div style="font-family: var(--serif); font-size: 1.35rem; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 20px;">
-      &ldquo;Before the smoke cleared over Totin on March 22, 1982, a single coded transmission echoed across the valley. The green fairy didn't just appear&mdash;she was invited. Book Two ('Back Home') will finally unmask who was listening on the other end of the line...&rdquo;
+    <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--fresh); margin-bottom: 12px; letter-spacing: 0.12em;">[ SEAL SHATTERED &bull; CLASSIFIED INTEL DISCLOSED ]</div>
+    <div style="font-family: var(--serif); font-size: 1.4rem; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 20px;">
+      &ldquo;Before the smoke cleared over Totin on March 22, 1982, a single coded broadcast echoed across the valley. The green fairy didn't just appear&mdash;she was invited. Book Two ('Back Home') will unmask who was listening on the other end of the line...&rdquo;
     </div>
-    <div style="font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--forest);">&mdash; Krystal Green</div>
+    <div style="font-family: var(--sans); font-size: 0.95rem; font-weight: 600; color: var(--forest); margin-bottom: 20px;">&mdash; Krystal Green</div>
+
+    <!-- The Investigator's Dispatch Newsletter inside decrypted area -->
+    <div class="dispatch-newsletter">
+      <h3>The Investigator's Dispatch</h3>
+      <p>Subscribe to receive classified case files, character dossiers, and early intelligence dispatches for Book 2 directly to your inbox.</p>
+      <form class="dispatch-form" onsubmit="event.preventDefault(); alert('Enlisted! Welcome to confidential intelligence dispatches.'); closeEasterEgg();">
+        <input type="email" placeholder="Enter your email address..." required>
+        <button type="submit">Enlist</button>
+      </form>
+    </div>
   </div>
 </div>
 
@@ -910,13 +920,34 @@
     document.getElementById('lightboxModal').classList.remove('active');
   }
 
-  /* Easter Egg Modal Functions */
-  function triggerEasterEgg() {
-    document.getElementById('easterEggModal').classList.add('active');
+  /* Interactive Cracked Egg / Seal State Logic */
+  let crackStage = 1; // 1 = 25%, 2 = 50%, 3 = 75%, 4 = 100% (Breach)
+
+  function crackEasterEgg() {
+    crackStage++;
+    const icon = document.getElementById('eggIcon');
+    const label = document.getElementById('eggLabel');
+
+    if (crackStage === 2) {
+      icon.textContent = '🐣';
+      label.textContent = 'CRACK SEAL AGAIN... (50%)';
+    } else if (crackStage === 3) {
+      icon.textContent = '⚡';
+      label.textContent = 'CRACK SEAL AGAIN... (75%)';
+    } else if (crackStage >= 4) {
+      icon.textContent = '💥';
+      label.textContent = 'CLASSIFIED DISPATCH DECRYPTED!';
+      document.getElementById('easterEggModal').classList.add('active');
+      crackStage = 0; // Reset for next interaction
+    }
   }
 
   function closeEasterEgg() {
     document.getElementById('easterEggModal').classList.remove('active');
+    const icon = document.getElementById('eggIcon');
+    const label = document.getElementById('eggLabel');
+    icon.textContent = '🥚';
+    label.textContent = 'CRACK SEAL TO DECRYPT INTEL (25%)';
   }
 
   /* FAQ Accordion Toggle */
