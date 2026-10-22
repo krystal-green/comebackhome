@@ -133,8 +133,8 @@
   .tri-item.live .s { color: var(--forest); font-weight: 600; }
 
   /* ---------- Archive Section + Lightbox ---------- */
-  .archive-section { padding: 60px 0 80px; border-top: 1px solid var(--line); background: rgba(194, 229, 184, 0.15); }
-  .archive-header { text-align: center; max-width: 650px; margin: 0 auto 50px; }
+  .archive-section { padding: 60px 0 50px; border-top: 1px solid var(--line); background: rgba(194, 229, 184, 0.15); }
+  .archive-header { text-align: center; max-width: 650px; margin: 0 auto 40px; }
   .archive-header h2 { font-size: clamp(2.4rem, 4vw, 3.2rem); margin-bottom: 14px; }
   .archive-header p { color: var(--soft); font-size: 1.05rem; }
   .dossier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
@@ -161,6 +161,20 @@
   .lightbox-content { background: var(--dossier); padding: 24px; border-radius: 16px; max-width: 950px; width: 100%; position: relative; border: 1px solid var(--line); box-shadow: 0 25px 60px rgba(0,0,0,0.6); }
   .lightbox-content img { width: 100%; max-height: 82vh; object-fit: contain; border-radius: 8px; pointer-events: none; -webkit-user-select: none; user-select: none; }
   .lightbox-close { position: absolute; top: 12px; right: 16px; background: var(--forest); color: #fff; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+  /* ---------- Middle Big & Funny Cracked Seal Easter Egg Section ---------- */
+  .middle-egg-section { padding: 70px 0; background: rgba(194, 229, 184, 0.28); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
+  .middle-egg-container { max-width: 650px; margin: 0 auto; padding: 0 24px; }
+  .big-egg-box {
+    background: #fff; border: 2px dashed var(--fresh); border-radius: 24px; padding: 40px 30px;
+    cursor: pointer; box-shadow: 0 15px 35px rgba(13,36,24,0.08); transition: all 0.2s ease;
+    margin-top: 24px; user-select: none; position: relative; overflow: hidden;
+  }
+  .big-egg-box:hover { border-color: var(--forest); transform: translateY(-4px); box-shadow: 0 20px 45px rgba(13,36,24,0.14); }
+  .big-egg-box:active { transform: scale(0.97); }
+  .big-egg-icon { font-size: 5rem; margin-bottom: 14px; transition: transform 0.2s ease; display: inline-block; }
+  .big-egg-title { font-family: var(--serif); font-size: 1.65rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .big-egg-sub { font-family: var(--mono); font-size: 0.9rem; color: var(--forest); font-weight: 500; }
 
   /* ---------- Verified Case Dispatches (Reviews) ---------- */
   .reviews-section { padding: 70px 0; border-top: 1px solid var(--line); }
@@ -248,24 +262,13 @@
   form.order input:focus, form.order select:focus, form.order textarea:focus { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(23,61,40,0.15); }
   .form-note { font-size: 1rem; margin-top: 14px; font-weight: 600; color: var(--forest); line-height: 1.5; }
 
-  /* ---------- Footer & Interactive Easter Egg Seal ---------- */
-  footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); position: relative; }
+  /* ---------- Footer ---------- */
+  footer.site { background: var(--ink); color: #EAF3E6; padding: 52px 48px 34px; border-top: 2px solid var(--forest); }
   .foot-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; flex-wrap: wrap; }
   .foot-title { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: #fff; }
   .foot-mail { font-size: 1.1rem; color: var(--fresh); border-bottom: 1px solid transparent; }
   .foot-mail:hover { border-bottom-color: var(--fresh); }
   .foot-small { margin-top: 22px; font-size: .88rem; color: #A4C4A0; font-family: var(--mono); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-
-  /* Cracked Seal Easter Egg Widget */
-  .egg-seal-widget {
-    display: inline-flex; align-items: center; gap: 10px; background: rgba(148,209,137,0.1);
-    border: 1px solid rgba(148,209,137,0.3); padding: 8px 14px; border-radius: 100px; cursor: pointer;
-    user-select: none; transition: all 0.2s ease;
-  }
-  .egg-seal-widget:hover { background: rgba(148,209,137,0.22); border-color: var(--fresh); transform: scale(1.02); }
-  .egg-seal-widget:active { transform: scale(0.96); }
-  .egg-icon { font-size: 1.3rem; line-height: 1; transition: transform 0.15s ease; }
-  .egg-label { font-family: var(--mono); font-size: 0.76rem; color: var(--fresh); letter-spacing: 0.05em; }
 
   /* Newsletter Box in Dispatch Modal */
   .dispatch-newsletter {
@@ -411,6 +414,22 @@
         <div style="margin-top: 20px;">
           <a class="btn" href="#cases" data-go="cases">View Full Archive</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MIDDLE BIG & FUNNY EASTER EGG SECTION ======================= -->
+  <section class="middle-egg-section">
+    <div class="middle-egg-container">
+      <div style="font-family: var(--mono); font-size: 0.82rem; color: var(--forest); margin-bottom: 6px; letter-spacing: 0.1em;">[ RESTRICTED EVIDENCE LOCKER ]</div>
+      <h2>The Suspicious Egg Experiment</h2>
+      <p class="body-text" style="margin: 0 auto;">Someone left a mysterious egg sitting right in the archive room. Rumor has it that poking it repeatedly will either reveal top-secret Book 2 lore or summon angry police officers. Let's find out.</p>
+      
+      <!-- Big Interactive Cracked Seal / Egg Box -->
+      <div class="big-egg-box" id="eggBox" onclick="crackEasterEgg()">
+        <span class="big-egg-icon" id="eggIcon">🥚</span>
+        <div class="big-egg-title" id="eggMainTitle">The Pristine Egg</div>
+        <div class="big-egg-sub" id="eggSubText">Click here to poke/crack the seal further! (Stage 1 of 4)</div>
       </div>
     </div>
   </section>
@@ -830,12 +849,6 @@
   </div>
   <div class="foot-small">
     <span>&copy; 2026 Come Back Home &middot; Krystal Green &middot; ISBN 978-93-6012-157-0</span>
-    
-    <!-- Interactive Cracked Seal Easter Egg Widget -->
-    <div class="egg-seal-widget" id="eggSealWidget" onclick="crackEasterEgg()">
-      <span class="egg-icon" id="eggIcon">🥚</span>
-      <span class="egg-label" id="eggLabel">CRACK SEAL TO DECRYPT INTEL (25%)</span>
-    </div>
   </div>
 </footer>
 
@@ -921,34 +934,44 @@
     document.getElementById('lightboxModal').classList.remove('active');
   }
 
-  /* Interactive Cracked Egg / Seal State Logic */
+  /* Interactive Big & Funny Cracked Egg / Seal State Logic */
   let crackStage = 1;
 
   function crackEasterEgg() {
     crackStage++;
     const icon = document.getElementById('eggIcon');
-    const label = document.getElementById('eggLabel');
+    const title = document.getElementById('eggMainTitle');
+    const sub = document.getElementById('eggSubText');
 
     if (crackStage === 2) {
       icon.textContent = '🐣';
-      label.textContent = 'CRACK SEAL AGAIN... (50%)';
+      icon.style.transform = 'rotate(-8deg)';
+      title.textContent = 'Getting Sweaty (50% Cracked)';
+      sub.textContent = 'Ouch! Stop poking! It is starting to crack like a bad alibi.';
     } else if (crackStage === 3) {
       icon.textContent = '⚡';
-      label.textContent = 'CRACK SEAL AGAIN... (75%)';
+      icon.style.transform = 'rotate(10deg)';
+      title.textContent = 'Code Red! (75% Cracked)';
+      sub.textContent = 'Hoo boy, big mistake. The green fairy is judging your life choices. One more click!';
     } else if (crackStage >= 4) {
       icon.textContent = '💥';
-      label.textContent = 'CLASSIFIED DISPATCH DECRYPTED!';
+      icon.style.transform = 'scale(1.2) rotate(0deg)';
+      title.textContent = 'BREACH SUCCESSFUL!';
+      sub.textContent = 'Classified intel unlocked. Prepare your brain.';
       document.getElementById('easterEggModal').classList.add('active');
-      crackStage = 0;
+      crackStage = 0; // Reset for next time
     }
   }
 
   function closeEasterEgg() {
     document.getElementById('easterEggModal').classList.remove('active');
     const icon = document.getElementById('eggIcon');
-    const label = document.getElementById('eggLabel');
+    const title = document.getElementById('eggMainTitle');
+    const sub = document.getElementById('eggSubText');
     icon.textContent = '🥚';
-    label.textContent = 'CRACK SEAL TO DECRYPT INTEL (25%)';
+    icon.style.transform = 'rotate(0deg)';
+    title.textContent = 'The Pristine Egg';
+    sub.textContent = 'Click here to poke/crack the seal further! (Stage 1 of 4)';
   }
 
   /* FAQ Accordion Toggle */
