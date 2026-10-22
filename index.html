@@ -243,7 +243,8 @@
   .payment-box { background: var(--mist); border: 1px dashed var(--forest); border-radius: 16px; padding: 24px; margin-top: 32px; margin-bottom: 28px; text-align: center; }
   .payment-box h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--forest); margin-bottom: 8px; }
   .payment-box p { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
-  .qr-placeholder { width: 160px; height: 160px; background: #fff; margin: 0 auto 12px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); border-radius: 8px; }
+  .qr-container { width: 180px; height: 180px; background: #fff; margin: 0 auto 12px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; padding: 8px; box-shadow: 0 4px 12px rgba(13,36,24,0.08); }
+  .qr-container img { width: 100%; height: 100%; object-fit: contain; }
 
   /* Dynamic Price Breakdown Box */
   .price-breakdown { background: rgba(194,229,184,0.3); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin-top: 24px; margin-bottom: 12px; font-size: 0.96rem; }
@@ -574,7 +575,7 @@
           <h1>About the Author</h1>
           <p>First of all, she is a wonderful person by nature and heart. This book along with her dream to become a writer started in 2016. And she was 13 at that time. Her writing was not good. Neither was her story. But ever since she was young, she has been creating stories. They always materialized in the real world in some ways, whether it was creating a 'movie' via her mother's phone with her toys as the cast or imagining scenarios where people were always in need of a savior (conveniently, She was always available to save people). Throughout her life, she has changed and so has her thinking. And that has contributed to her story evolving a lot since it first started.</p>
         </div>
-        <div class="portrait" data-initials="KG"><img src="shruti.jpeg" alt="Krystal Green" onerror="this.remove()"></div>
+        <div class="portrait" data-initials="KG"><img src="ShrutiC.jpg" alt="Krystal Green" onerror="this.remove()"></div>
       </div>
     </section>
 
@@ -821,8 +822,8 @@
         <div class="payment-box">
           <h3>Step 2: Scan &amp; Pay Exact Total (<span id="payAmountBox">&#8377;404</span>)</h3>
           <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm for the exact Grand Total above, then enter your UTR ID and upload your payment receipt screenshot below.</p>
-          <div class="qr-placeholder">
-            [ Insert QR Code Image Here ]
+          <div class="qr-container">
+            <img src="UPIQR.jpeg" alt="UPI Payment QR Code" onerror="this.parentElement.innerHTML='<div style=\'font-size:0.8rem;color:var(--muted);padding-top:60px;\'>UPIQR.jpeg Not Found</div>'">
           </div>
         </div>
 
