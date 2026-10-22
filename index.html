@@ -152,7 +152,7 @@
   .dossier-date { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
   .dossier-desc { font-size: 0.95rem; color: var(--soft); line-height: 1.5; }
 
-  /* Lightbox Modal (Enlarged & Protected) */
+  /* Lightbox Modal */
   .lightbox-modal {
     display: none; position: fixed; inset: 0; background: rgba(13,36,24,0.9); z-index: 1000;
     align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(6px);
@@ -226,15 +226,15 @@
   .order-card { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: 48px; box-shadow: 0 20px 40px rgba(13,36,24,0.06); }
   
   /* Payment Box */
-  .payment-box { background: var(--mist); border: 1px dashed var(--forest); border-radius: 16px; padding: 24px; margin-bottom: 28px; text-align: center; }
+  .payment-box { background: var(--mist); border: 1px dashed var(--forest); border-radius: 16px; padding: 24px; margin-top: 32px; margin-bottom: 28px; text-align: center; }
   .payment-box h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--forest); margin-bottom: 8px; }
   .payment-box p { font-size: 0.95rem; color: var(--soft); margin-bottom: 14px; }
   .qr-placeholder { width: 160px; height: 160px; background: #fff; margin: 0 auto 12px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); border-radius: 8px; }
 
   /* Dynamic Price Breakdown Box */
-  .price-breakdown { background: rgba(194,229,184,0.25); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; font-size: 0.95rem; }
+  .price-breakdown { background: rgba(194,229,184,0.3); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; margin-top: 24px; margin-bottom: 12px; font-size: 0.96rem; }
   .price-row { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--soft); }
-  .price-row.total { font-weight: 700; color: var(--forest); font-family: var(--serif); font-size: 1.25rem; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; }
+  .price-row.total { font-weight: 700; color: var(--forest); font-family: var(--serif); font-size: 1.3rem; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 10px; }
 
   form.order { display: grid; gap: 20px; }
   form.order .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -324,7 +324,7 @@
         <div class="pricing-badge">
           <span class="old-price">&#8377;399</span>
           <span class="current-price">&#8377;349</span>
-          <span class="shipping-note">+ Shipping</span>
+          <span class="shipping-note">+ India Post Shipping</span>
         </div>
 
         <p class="body-text" style="margin-top: 14px;">23-year-old Christine Tavley is searching for the truth behind the explosion that wiped her hometown off the map &mdash; and the serial bomber hiding behind the symbol of a green fairy.</p>
@@ -645,7 +645,7 @@
 <main class="view" id="view-order">
   <div class="container contact-top">
     <h1>Order Your Paperback Copy</h1>
-    <p class="body-text">Fill out your shipping and payment details below. Price: <strong>&#8377;349 + shipping</strong>. Orders are processed directly.</p>
+    <p class="body-text">Fill out your shipping and payment details below. Paperback Price: <strong>&#8377;349</strong> + India Post shipping.</p>
   </div>
 
   <!-- FAQ Accordion Section -->
@@ -654,31 +654,22 @@
     
     <div class="faq-item">
       <div class="faq-question">How long does shipping take across India?</div>
-      <div class="faq-answer">Orders are typically dispatched within 2-3 business days. Standard delivery across India takes approximately 5 to 7 business days depending on your location.</div>
+      <div class="faq-answer">Orders are typically dispatched via India Post within 2-3 business days. Standard delivery across India takes approximately 5 to 7 business days depending on your location.</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">How is my payment verified after scanning the QR code?</div>
-      <div class="faq-answer">Once you complete the UPI payment, enter your exact UTR / Transaction ID in the form and upload your payment screenshot. Our team verifies the transaction reference against our bank statement before dispatching your book.</div>
+      <div class="faq-answer">Once you complete the UPI payment for the calculated grand total, enter your exact UTR / Transaction ID in the form and upload your payment screenshot. Our team verifies the transaction reference against our statement before dispatching your book.</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question">Will I receive tracking details for my shipment?</div>
-      <div class="faq-answer">Yes! Once your paperback copy is packed and dispatched, tracking details and updates will be sent directly to your registered email address.</div>
+      <div class="faq-answer">Yes! Once your paperback copy is packed and dispatched via India Post, tracking numbers and dispatch updates will be sent directly to your registered email address.</div>
     </div>
   </section>
 
   <div class="order-container">
     <div class="order-card">
-      
-      <!-- Payment QR Section -->
-      <div class="payment-box">
-        <h3>Step 1: Scan &amp; Pay</h3>
-        <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm to complete your payment (&#8377;349 + calculated shipping), then enter your UTR / Transaction ID and upload your payment screenshot below.</p>
-        <div class="qr-placeholder">
-          [ Insert QR Code Image Here ]
-        </div>
-      </div>
 
       <!-- Order Form (Direct AJAX Submission to FormSubmit) -->
       <form class="order" id="orderForm" action="https://formsubmit.co/ajax/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
@@ -687,8 +678,8 @@
         <input type="hidden" name="_subject" id="formSubject" value="New Book Order Request: Come Back Home">
         <input type="hidden" name="_template" value="table">
 
-        <h3>Step 2: Shipping &amp; Order Details</h3>
-        <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">All fields marked required must be filled accurately for dispatch.</p>
+        <h3>Step 1: Shipping Details &amp; Location</h3>
+        <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">Fill in your delivery address to automatically calculate exact India Post shipping charges.</p>
 
         <div class="row">
           <div>
@@ -722,6 +713,7 @@
             <label for="state">State (India) <small>(required)</small></label>
             <select id="state" name="State" required>
               <option value="">Select State / UT</option>
+              <option value="Maharashtra">Maharashtra</option>
               <option value="Andhra Pradesh">Andhra Pradesh</option>
               <option value="Arunachal Pradesh">Arunachal Pradesh</option>
               <option value="Assam">Assam</option>
@@ -735,7 +727,6 @@
               <option value="Karnataka">Karnataka</option>
               <option value="Kerala">Kerala</option>
               <option value="Madhya Pradesh">Madhya Pradesh</option>
-              <option value="Maharashtra">Maharashtra</option>
               <option value="Manipur">Manipur</option>
               <option value="Meghalaya">Meghalaya</option>
               <option value="Mizoram">Mizoram</option>
@@ -779,37 +770,47 @@
             <input id="quantity" name="Quantity" type="number" value="1" min="1" max="10" required>
           </div>
           <div>
-            <label for="utr">UTR / Transaction ID <small>(required)</small></label>
-            <input id="utr" name="UTR_Transaction_ID" type="text" placeholder="Enter UPI / Bank UTR reference" required>
+            <label for="source">How did you find out? <small>(optional)</small></label>
+            <select id="source" name="Source_Found">
+              <option value="">Select option</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Friends">Friends</option>
+              <option value="Family">Family</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
-        </div>
-
-        <!-- Live Price & Shipping Breakdown Calculator -->
-        <div class="price-breakdown">
-          <div class="price-row"><span>Book Price (&#8377;349 &times; <span id="qtyDisplay">1</span>)</span><span id="bookSubtotal">&#8377;349</span></div>
-          <div class="price-row"><span>Estimated Shipping across India</span><span id="shippingCost">&#8377;50</span></div>
-          <div class="price-row total"><span>Total Amount to Pay</span><span id="grandTotal">&#8377;399</span></div>
-        </div>
-
-        <div>
-          <label for="payment_screenshot">Upload Payment Screenshot <small>(required)</small></label>
-          <input id="payment_screenshot" name="Payment_Screenshot" type="file" accept="image/*" required style="padding: 9px;">
-        </div>
-
-        <div>
-          <label for="source">How did you find out about the book? <small>(optional)</small></label>
-          <select id="source" name="Source_Found">
-            <option value="">Select option</option>
-            <option value="Instagram">Instagram</option>
-            <option value="Friends">Friends</option>
-            <option value="Family">Family</option>
-            <option value="Other">Other</option>
-          </select>
         </div>
 
         <div id="otherSourceContainer" style="display: none;">
           <label for="otherSourceInput">Please specify where you found out: <small>(required if Other)</small></label>
           <input id="otherSourceInput" name="Other_Source_Detail" type="text" placeholder="e.g. Book Blog, YouTube, etc.">
+        </div>
+
+        <!-- Dynamic India Post Price & Shipping Breakdown Calculator -->
+        <div class="price-breakdown">
+          <div class="price-row"><span>Book Subtotal (&#8377;349 &times; <span id="qtyDisplay">1</span>)</span><span id="bookSubtotal">&#8377;349</span></div>
+          <div class="price-row"><span>India Post Tariff (<span id="shippingLocLabel">Select State</span>)</span><span id="shippingCost">&#8377;60</span></div>
+          <div class="price-row total"><span>Grand Total to Pay</span><span id="grandTotal">&#8377;409</span></div>
+        </div>
+
+        <!-- Payment Step -->
+        <div class="payment-box">
+          <h3>Step 2: Scan &amp; Pay Exact Total (<span id="payAmountBox">&#8377;409</span>)</h3>
+          <p>Scan the QR code below via UPI / GPay / PhonePe / Paytm for the exact Grand Total above, then enter your UTR ID and upload your payment receipt screenshot below.</p>
+          <div class="qr-placeholder">
+            [ Insert QR Code Image Here ]
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="utr">UTR / Transaction ID <small>(required)</small></label>
+            <input id="utr" name="UTR_Transaction_ID" type="text" placeholder="Enter UPI / Bank UTR reference" required>
+          </div>
+          <div>
+            <label for="payment_screenshot">Upload Receipt Screenshot <small>(required)</small></label>
+            <input id="payment_screenshot" name="Payment_Screenshot" type="file" accept="image/*" required style="padding: 9px;">
+          </div>
         </div>
 
         <div>
@@ -921,7 +922,7 @@
   }
 
   /* Interactive Cracked Egg / Seal State Logic */
-  let crackStage = 1; // 1 = 25%, 2 = 50%, 3 = 75%, 4 = 100% (Breach)
+  let crackStage = 1;
 
   function crackEasterEgg() {
     crackStage++;
@@ -938,7 +939,7 @@
       icon.textContent = '💥';
       label.textContent = 'CLASSIFIED DISPATCH DECRYPTED!';
       document.getElementById('easterEggModal').classList.add('active');
-      crackStage = 0; // Reset for next interaction
+      crackStage = 0;
     }
   }
 
@@ -976,34 +977,65 @@
     });
   }
 
-  /* Dynamic Shipping & Total Calculator */
+  /* Dynamic India Post Shipping Calculator Matrix */
+  const stateSelect = document.getElementById('state');
   const quantityInput = document.getElementById('quantity');
   const qtyDisplay = document.getElementById('qtyDisplay');
   const bookSubtotal = document.getElementById('bookSubtotal');
   const shippingCost = document.getElementById('shippingCost');
+  const shippingLocLabel = document.getElementById('shippingLocLabel');
   const grandTotal = document.getElementById('grandTotal');
+  const payAmountBox = document.getElementById('payAmountBox');
   const formSubject = document.getElementById('formSubject');
+
+  function calculateIndiaPostShipping(selectedState, qty) {
+    if (!selectedState) return { baseRate: 60, label: 'Standard India Post' };
+
+    // Zone 1: Home / Local State
+    if (selectedState === 'Maharashtra') {
+      return { baseRate: 35 + (qty - 1) * 15, label: 'Local (Maharashtra)' };
+    }
+    
+    // Zone 2: Neighboring & Nearby States (up to 500-1000km)
+    const nearbyStates = ['Gujarat', 'Goa', 'Madhya Pradesh', 'Karnataka', 'Chhattisgarh', 'Dadra and Nagar Haveli and Daman and Diu'];
+    if (nearbyStates.includes(selectedState)) {
+      return { baseRate: 60 + (qty - 1) * 25, label: 'Zone A (Nearby States)' };
+    }
+
+    // Zone 3: Special / Remote States & Island Union Territories
+    const remoteStates = ['Assam', 'Arunachal Pradesh', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Sikkim', 'Tripura', 'Jammu and Kashmir', 'Ladakh', 'Andaman and Nicobar Islands', 'Lakshadweep'];
+    if (remoteStates.includes(selectedState)) {
+      return { baseRate: 110 + (qty - 1) * 40, label: 'Special Zone (Remote/Island)' };
+    }
+
+    // Zone 4: Rest of India (1000km+)
+    return { baseRate: 85 + (qty - 1) * 30, label: 'Zone B (Rest of India)' };
+  }
 
   function updatePricing() {
     const qty = Math.max(1, parseInt(quantityInput.value) || 1);
+    const selectedState = stateSelect.value;
+    
     const subtotal = 349 * qty;
-    // Shipping: ₹50 for the 1st book + ₹30 for each additional book
-    const shipping = 50 + (qty - 1) * 30;
-    const total = subtotal + shipping;
+    const shipping = calculateIndiaPostShipping(selectedState, qty);
+    const total = subtotal + shipping.baseRate;
 
     qtyDisplay.textContent = qty;
     bookSubtotal.textContent = '₹' + subtotal;
-    shippingCost.textContent = '₹' + shipping;
+    shippingCost.textContent = '₹' + shipping.baseRate;
+    shippingLocLabel.textContent = shipping.label;
     grandTotal.textContent = '₹' + total;
+    payAmountBox.textContent = '₹' + total;
 
     if (formSubject) {
-      formSubject.value = `New Book Order Request: Come Back Home (Qty: ${qty}, Total: ₹${total})`;
+      formSubject.value = `New Book Order Request: Come Back Home (State: ${selectedState || 'Not Selected'}, Qty: ${qty}, Total: ₹${total})`;
     }
   }
 
-  if (quantityInput) {
+  if (quantityInput && stateSelect) {
     quantityInput.addEventListener('input', updatePricing);
     quantityInput.addEventListener('change', updatePricing);
+    stateSelect.addEventListener('change', updatePricing);
     updatePricing();
   }
 
