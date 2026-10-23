@@ -700,12 +700,13 @@
   <div class="order-container">
     <div class="order-card">
 
-      <!-- Order Form -->
-      <form class="order" id="orderForm" action="https://formsubmit.co/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
+      <!-- Order Form with Hidden Iframe Target -->
+      <form class="order" id="orderForm" action="https://formsubmit.co/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data" target="hidden_iframe">
         
         <!-- FormSubmit Configuration Inputs -->
         <input type="hidden" name="_subject" id="formSubject" value="New Book Order Request: Come Back Home">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
 
         <h3>Step 1: Shipping Details &amp; Location</h3>
         <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">Fill in your delivery address to automatically calculate exact India Post shipping charges from Gorakhpur, UP.</p>
@@ -848,6 +849,9 @@
           <div class="form-note" id="formNote"></div>
         </div>
       </form>
+
+      <!-- Invisible Iframe Target for Seamless Background Uploads -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     </div>
   </div>
@@ -1159,53 +1163,35 @@
     });
   }
 
-  /* Order Form AJAX/Multipart Handler with Popup Confirmation */
+  /* Order Form Submission & Iframe Response Trigger */
   const orderForm = document.getElementById('orderForm');
   const orderSubmitBtn = document.getElementById('submitBtn');
-  const orderFormNote = document.getElementById('formNote');
+  const hiddenIframe = document.getElementById('hidden_iframe');
+  let isOrderSubmitted = false;
 
   if (orderForm) {
-    orderForm.addEventListener('submit', async e => {
-      e.preventDefault();
-
+    orderForm.addEventListener('submit', e => {
       if (!orderForm.checkValidity()) {
-        orderFormNote.textContent = 'Please fill in all required fields correctly.';
-        orderFormNote.style.color = '#c0392b';
         return;
       }
-
+      isOrderSubmitted = true;
       orderSubmitBtn.disabled = true;
       orderSubmitBtn.textContent = 'Uploading screenshot & submitting order...';
-      orderFormNote.style.color = 'var(--forest)';
-      orderFormNote.textContent = 'Sending your order request and screenshot...';
+    });
+  }
 
-      const formData = new FormData(orderForm);
-
-      try {
-        const response = await fetch(orderForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          orderForm.reset();
-          if (otherContainer) otherContainer.style.display = 'none';
-          updatePricing();
-          orderFormNote.textContent = '';
-          orderSubmitBtn.disabled = false;
-          orderSubmitBtn.textContent = 'Submit Order Request';
-
-          // Trigger Success Modal
-          document.getElementById('orderSuccessModal').classList.add('active');
-        } else {
-          throw new Error('Form submission failed.');
-        }
-      } catch (err) {
-        orderFormNote.style.color = '#c0392b';
-        orderFormNote.textContent = 'Something went wrong while uploading your receipt. Please try again or email your screenshot directly to ' + BOOK_EMAIL;
+  if (hiddenIframe) {
+    hiddenIframe.addEventListener('load', () => {
+      if (isOrderSubmitted) {
+        isOrderSubmitted = false;
+        orderForm.reset();
+        if (otherContainer) otherContainer.style.display = 'none';
+        updatePricing();
         orderSubmitBtn.disabled = false;
         orderSubmitBtn.textContent = 'Submit Order Request';
+
+        // Trigger Success Modal Popup
+        document.getElementById('orderSuccessModal').classList.add('active');
       }
     });
   }
