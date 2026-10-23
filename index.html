@@ -700,13 +700,12 @@
   <div class="order-container">
     <div class="order-card">
 
-      <!-- Order Form (Standard Multipart Submission so Payment Screenshots attach properly) -->
+      <!-- Order Form -->
       <form class="order" id="orderForm" action="https://formsubmit.co/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
         
         <!-- FormSubmit Configuration Inputs -->
         <input type="hidden" name="_subject" id="formSubject" value="New Book Order Request: Come Back Home">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://krystal-green.github.io/comebackhome/#order">
 
         <h3>Step 1: Shipping Details &amp; Location</h3>
         <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">Fill in your delivery address to automatically calculate exact India Post shipping charges from Gorakhpur, UP.</p>
@@ -865,6 +864,19 @@
   </div>
 </footer>
 
+<!-- Order Confirmation Success Popup Modal -->
+<div class="lightbox-modal" id="orderSuccessModal" onclick="closeOrderSuccessModal()">
+  <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 540px; text-align: center; padding: 40px 32px;">
+    <button class="lightbox-close" onclick="closeOrderSuccessModal()">&times;</button>
+    <div style="font-size: 3.5rem; margin-bottom: 12px; color: var(--forest);">✓</div>
+    <div style="font-family: var(--serif); font-size: 1.8rem; font-weight: 700; color: var(--ink); margin-bottom: 12px;">Order Request Received!</div>
+    <p style="font-size: 1rem; color: var(--soft); line-height: 1.6; margin-bottom: 24px;">
+      Thank you for ordering <strong>Come Back Home</strong>! Your payment screenshot and details have been received and sent for verification. Once confirmed, your paperback will be packaged and dispatched via <strong>India Post from Gorakhpur, UP</strong>. You will receive tracking details directly at your registered email address.
+    </p>
+    <button class="btn" onclick="closeOrderSuccessModal()" style="width: 100%;">Close &amp; Return</button>
+  </div>
+</div>
+
 <!-- Easter Egg Crack Disclosure Modal: The Investigator's Dispatch -->
 <div class="lightbox-modal" id="easterEggModal" onclick="closeEasterEgg()">
   <div class="lightbox-content" onclick="event.stopPropagation()" style="max-width: 580px; text-align: center; padding: 40px 32px;">
@@ -946,6 +958,11 @@
 
   function closeLightbox() {
     document.getElementById('lightboxModal').classList.remove('active');
+  }
+
+  /* Order Confirmation Success Popup Modal Functions */
+  function closeOrderSuccessModal() {
+    document.getElementById('orderSuccessModal').classList.remove('active');
   }
 
   /* Interactive Big & Funny Cracked Egg / Seal State Logic */
@@ -1138,6 +1155,57 @@
         fbNote.textContent = 'Something went wrong. Please email your feedback directly to ' + BOOK_EMAIL;
         fbSubmitBtn.disabled = false;
         fbSubmitBtn.textContent = 'Submit Feedback';
+      }
+    });
+  }
+
+  /* Order Form AJAX/Multipart Handler with Popup Confirmation */
+  const orderForm = document.getElementById('orderForm');
+  const orderSubmitBtn = document.getElementById('submitBtn');
+  const orderFormNote = document.getElementById('formNote');
+
+  if (orderForm) {
+    orderForm.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      if (!orderForm.checkValidity()) {
+        orderFormNote.textContent = 'Please fill in all required fields correctly.';
+        orderFormNote.style.color = '#c0392b';
+        return;
+      }
+
+      orderSubmitBtn.disabled = true;
+      orderSubmitBtn.textContent = 'Uploading screenshot & submitting order...';
+      orderFormNote.style.color = 'var(--forest)';
+      orderFormNote.textContent = 'Sending your order request and screenshot...';
+
+      const formData = new FormData(orderForm);
+
+      try {
+        const response = await fetch(orderForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          orderForm.reset();
+          if (otherContainer) otherContainer.style.display = 'none';
+          updatePricing();
+          orderFormNote.textContent = '';
+          orderSubmitBtn.disabled = false;
+          orderSubmitBtn.textContent = 'Submit Order Request';
+
+          // Trigger Success Modal
+          document.getElementById('orderSuccessModal').classList.add('active');
+        } else {
+          throw new Error('Form submission failed.');
+        }
+      } catch (err) {
+        orderFormNote.style.color = '#c0392b';
+        orderFormNote.textContent = 'Something went wrong while uploading your receipt. Please try again or email your screenshot directly to ' + BOOK_EMAIL;
+        orderSubmitBtn.disabled = false;
+        orderSubmitBtn.textContent = 'Submit Order Request';
       }
     });
   }
