@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Come Back Home &mdash; Part One of The Home Trilogy</title>
@@ -592,7 +591,7 @@
           <h2>About the Editor</h2>
           <p>Prathamesh S. Kadam edited and typeset <em>Come Back Home</em> with rigorous precision. By day, he researches supernovae and machine learning in astrophysics &mdash; by night, he shapes complex narratives and psychological suspense into their final gripping form.</p>
         </div>
-        <div class="portrait" data-initials="PK"><img src="kp.jpeg" alt="Prathamesh S. Kadam" onerror="this.remove()"></div>
+        <div class="portrait" data-initials="PK"><img src="Prathamesh.jpeg" alt="Prathamesh S. Kadam" onerror="this.remove()"></div>
       </div>
     </section>
 
@@ -701,12 +700,13 @@
   <div class="order-container">
     <div class="order-card">
 
-      <!-- Order Form (Direct AJAX Submission to FormSubmit) -->
-      <form class="order" id="orderForm" action="https://formsubmit.co/ajax/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
+      <!-- Order Form (Standard Multipart Submission so Payment Screenshots attach properly) -->
+      <form class="order" id="orderForm" action="https://formsubmit.co/krystalgreen2709@gmail.com" method="POST" enctype="multipart/form-data">
         
         <!-- FormSubmit Configuration Inputs -->
         <input type="hidden" name="_subject" id="formSubject" value="New Book Order Request: Come Back Home">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://krystal-green.github.io/comebackhome/#order">
 
         <h3>Step 1: Shipping Details &amp; Location</h3>
         <p style="font-size: 0.92rem; color: var(--soft); margin-bottom: 12px;">Fill in your delivery address to automatically calculate exact India Post shipping charges from Gorakhpur, UP.</p>
@@ -861,7 +861,7 @@
   </div>
   <div class="foot-small">
     <span>&copy; 2026 Come Back Home &middot; Krystal Green &middot; ISBN 978-93-6012-157-0</span>
-    <span class="dev-credit">Website by Prathamesh S. Kadam</span>
+    <span class="dev-credit">Website by Prathamesh Kadam</span>
   </div>
 </footer>
 
@@ -1138,53 +1138,6 @@
         fbNote.textContent = 'Something went wrong. Please email your feedback directly to ' + BOOK_EMAIL;
         fbSubmitBtn.disabled = false;
         fbSubmitBtn.textContent = 'Submit Feedback';
-      }
-    });
-  }
-
-  /* Order Form AJAX Submission Logic */
-  const form = document.getElementById('orderForm');
-  const note = document.getElementById('formNote');
-  const submitBtn = document.getElementById('submitBtn');
-  
-  if (form) {
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      if (!form.checkValidity()) { 
-        note.textContent = 'Please fill in all required fields correctly.'; 
-        note.style.color = '#c0392b';
-        return; 
-      }
-      
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting order...';
-      note.style.color = 'var(--forest)';
-      note.textContent = 'Sending your order request...';
-
-      const formData = new FormData(form);
-      
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        if (response.ok) {
-          form.reset();
-          if (otherContainer) otherContainer.style.display = 'none';
-          updatePricing();
-          note.style.color = 'var(--forest)';
-          note.textContent = "Thank you for ordering my debut novel! Your payment will be verified and you'll receive an order confirmation at your email address. Shipping details will be shared once your order is dispatched.";
-          submitBtn.textContent = 'Order Submitted Successfully!';
-        } else {
-          throw new Error('Server response was not ok');
-        }
-      } catch (err) {
-        note.style.color = '#c0392b';
-        note.textContent = 'Something went wrong. Please email your details and payment screenshot directly to ' + BOOK_EMAIL;
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Order Request';
       }
     });
   }
